@@ -1,0 +1,7 @@
+# Definimos nuestras entradas de datos, puedes ser archivos locales o conexiones a bases de datos.
+
+  raw_data: # IMPORTANTE: Este es el nombre que le doy a este set de datos.
+    type: pandas.ExcelDataset
+    filepath: data/01_raw/ENB2012_data.xlsx
+    load_args:
+      engine: openpyxl
