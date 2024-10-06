@@ -1,0 +1,25 @@
+
+# En este archivo se van a definir los parámetros que puedo utilizar en los nodos
+eda_params:
+  current_columns:
+    - X1
+    - X2
+    - X3
+    - X4
+    - X5
+    - X6
+    - X7
+    - X8
+    - Y1
+    - Y2
+  target_columns:
+    - Relative_Compactness
+    - Surface_Area
+    - Wall_Area
+    - Roof_Area
+    - Overall_Height
+    - Orientation
+    - Glazing Area
+    - Glazing Area Distribution
+    - Heating Load
+    - Cooling Load

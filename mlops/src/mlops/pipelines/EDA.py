@@ -2,8 +2,9 @@
 # En este script se definiran algunas de las funciones que se utilizaran en el análisis exploratorio de datos
 import pandas as pd
 from kedro.pipeline import node
+import os
 
-
+root_path = os.getcwd()
 
 # 1) Función de boxplots, toma un pandas DF  y una lista para generar secuencialmente una serie de boxplots
 def boxplot(dataset:pd.DataFrame, columns:list):
@@ -16,11 +17,20 @@ def boxplot(dataset:pd.DataFrame, columns:list):
         plt.title(f"Boxplot de {i}")  # Agrega el título
         plt.show()  # Muestra cada gráfico de manera correcta
 
+
+
 # 1.1) Declarar esta funcion como un nodo
 boxplot_node  = node(func=boxplot,
                      inputs=["dataset", "params:columns_to_plot"],
                      outputs=None, # No estamos devolviendo nada en este caso, solo se visualiza
-                     name="boxplot_node"
-                     )
+                     name="boxplot_node")
 
 
+
+# 2) Renaming columns
+def rename(dataset:pd.DataFrame, original_name:list, target_name:list):
+
+    for i, w in zip(original_name, target_name):
+        dataset.rename(columns={i: j}, inplace=True)
+
+    return dataset # Devolvemos el set de datos renombrado
