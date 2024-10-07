@@ -15,7 +15,9 @@ def boxplot(dataset:pd.DataFrame, columns:list):
     for i in columns:
         dataset[i].plot(kind="box")
         plt.title(f"Boxplot de {i}")  # Agrega el título
-        plt.show()  # Muestra cada gráfico de manera correcta
+        output_path = f"/Users/orlandoandrade/Documents/Maestria en inteligencia artificial aplicada/Materias/3 trimestre/Repositorio/Repositorio grupal/machine-learning-operations/mlops/data/02_intermediate/test{i}.png"
+        plt.savefig(output_path)
+        plt.close()
 
 
 
