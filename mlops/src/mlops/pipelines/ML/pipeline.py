@@ -19,19 +19,24 @@ generated using Kedro 0.19.8
   #  return pipeline(data_pipeline) # Integramos el pipeline de nodos
 
 
-# src/<your_project_name>/pipelines/eda/pipeline.py
-
 from kedro.pipeline import Pipeline, node
-from .nodes import boxplot_node
+from .nodes import boxplot_node, rename_node
 
 def create_pipeline(**kwargs):
+
     return Pipeline(
         [
             node(
+                func=rename_node,
+                inputs="raw_data", # Le indico el nombre del set de datos declarado en el catalogo
+                outputs="renamed_data", # Nombro mi set de datos de salida
+                name="rename_node",
+            ),
+            node(
                 func=boxplot_node,
-                inputs="raw_data",
+                inputs="renamed_data", # Vease que este set de datos es el output del anterior (tambien se tiene que dar de alta en el catalogo)
                 outputs=None,
                 name="boxplot_node",
-            ),
+            )
         ]
     )

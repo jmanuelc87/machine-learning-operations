@@ -12,7 +12,28 @@ import os
 
 root_path = os.getcwd()
 
-# 1) Función de boxplots, toma un pandas DF  y una lista para generar secuencialmente una serie de boxplots
+
+
+# 1) Declaración de la función rename
+def rename_node(dataset:pd.DataFrame):
+    # Modifico directamente el nombre de las columnas
+    dataset.rename(columns={"X1": "Relative_Compactness",
+                            "X2": "Surface_Area",
+                            "X3": "Wall_Area",
+                            "X4": "Roof_Area",
+                            "X5": "Overall_Height",
+                            "X6": "Orientation",
+                            "X7": "Glazing Area",
+                            "X8": "Glazing Area Distribution",
+                            "Y1": "Heating Load",
+                            "Y2": "Cooling Load"
+                            }, inplace=True)
+    return dataset
+
+
+
+
+# 2) Función de boxplots, toma un pandas DF  y una lista para generar secuencialmente una serie de boxplots
 def boxplot(dataset:pd.DataFrame, columns:list): # Importante, hay que indicarle
     # Importación de librería necesaria
     import matplotlib.pyplot as plt
@@ -32,15 +53,3 @@ def boxplot_node(dataset: pd.DataFrame):
 
 
 
-# 1.1) Declarar esta funcion como un nodo
-
-
-
-
-# 2) Renaming columns
-def rename(dataset:pd.DataFrame, original_name:list, target_name:list):
-
-    for i, w in zip(original_name, target_name):
-        dataset.rename(columns={i: j}, inplace=True)
-
-    return dataset # Devolvemos el set de datos renombrado
