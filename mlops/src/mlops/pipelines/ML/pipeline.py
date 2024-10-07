@@ -3,40 +3,37 @@ This is a boilerplate pipeline 'ML'
 generated using Kedro 0.19.8
 """
 
-#from kedro.pipeline import Pipeline, pipeline
-#from kedro.pipeline import node
-#from .nodes import boxplot # Importante, vease como estoy importando como modulo, las funciones definidas en el archivos nodes.py
-
-# Declarar los nodos por separados
-#boxplot_node  = node(func=boxplot,
- #                    inputs=["raw_data"], # Importante, estos inputs hacen referencia al nombre dado en el catalogo a ese set de datos
-  #                   outputs=None, # Se establece en None porque los resultados se guardan directamente en archivos y no se devuelven a Kedro.
-   #                  name="boxplot_node")
-#def create_pipeline(**kwargs) -> Pipeline:
-
- #   data_pipeline = [boxplot_node,] # aca puedes ir más nodos
-
-  #  return pipeline(data_pipeline) # Integramos el pipeline de nodos
-
-
 from kedro.pipeline import Pipeline, node
 from .nodes import boxplot_node, rename_node
 
-def create_pipeline(**kwargs):
 
+# 1) Definimos los nodos de forma individual
+
+# 1.1) Definir el nodo rename_node
+rename = node(
+    func=rename_node,  # Función que será llamada en este nodo
+    inputs="raw_data",  # Set de datos de entrada, tal como se indica en el catálogo
+    outputs="renamed_data",  # Set de datos de salida, también definido en el catálogo
+    name="rename_node"  # Nombre del nodo para identificarlo en el pipeline
+)
+
+# Kedro se encarga de pasar el dataset al primer parámetro de la función rename_node.
+
+# 1.2) Definir el nodo boxplot_node
+boxplot = node(
+    func=boxplot_node,  # Función que será llamada en este nodo
+    inputs="renamed_data",  # Utiliza los datos de salida del nodo anterior
+    outputs=None,  # Este nodo no produce un set de datos, simplemente visualiza
+    name="boxplot_node"  # Nombre del nodo para identificarlo en el pipeline
+)
+
+
+# 2) Integración de nodos
+def create_pipeline(**kwargs):
     return Pipeline(
         [
-            node(
-                func=rename_node,
-                inputs="raw_data", # Le indico el nombre del set de datos declarado en el catalogo
-                outputs="renamed_data", # Nombro mi set de datos de salida
-                name="rename_node",
-            ),
-            node(
-                func=boxplot_node,
-                inputs="renamed_data", # Vease que este set de datos es el output del anterior (tambien se tiene que dar de alta en el catalogo)
-                outputs=None,
-                name="boxplot_node",
-            )
+            rename,  # Integramos el nodo rename_node
+            boxplot  # Integramos el nodo boxplot_node
         ]
     )
+

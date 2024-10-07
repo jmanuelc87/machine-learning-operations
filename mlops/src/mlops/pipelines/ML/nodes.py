@@ -10,8 +10,6 @@ import pandas as pd
 from kedro.pipeline import node
 import os
 
-root_path = os.getcwd()
-
 
 
 # 1) Declaración de la función rename
@@ -32,24 +30,37 @@ def rename_node(dataset:pd.DataFrame):
 
 
 
-
 # 2) Función de boxplots, toma un pandas DF  y una lista para generar secuencialmente una serie de boxplots
-def boxplot(dataset:pd.DataFrame, columns:list): # Importante, hay que indicarle
+def boxplot_node(dataset:pd.DataFrame):
+
     # Importación de librería necesaria
     import matplotlib.pyplot as plt
+    import os
+
+    # Obtención del directorio base
+    root_path = os.getcwd()
+
+    # Obtención de nombre de las columnas
+    columns = dataset.columns.tolist()
+
+    # Definir la ruta de exportación:
+    graphs_path = root_path + "/data/02_intermediate/graphs"
+
+    # Comprobar si la carpeta existe, y si no, crearla
+    if not os.path.exists(graphs_path):
+        os.makedirs(graphs_path)
 
     # Inicio del ciclo de impresiones
     for i in columns:
         dataset[i].plot(kind="box")
         plt.title(f"Boxplot de {i}")  # Agrega el título
-        output_path = f"/Users/orlandoandrade/Documents/Maestria en inteligencia artificial aplicada/Materias/3 trimestre/Repositorio/Repositorio grupal/machine-learning-operations/mlops/data/02_intermediate/test{i}.png"
-        plt.savefig(output_path)
+        output_path =  graphs_path + f"/Box plot {i}.png"  # Define la ruta completa del archivo
+        plt.savefig(output_path)  # Guardar la gráfica en la carpeta "graphs"
+        print("Se guardo el siguiente archivo:", output_path)
         plt.close()
 
-# 2) Segunda funcion, estoy simoplificando los parametros y dejandolo solo en funcion al set de datos de entrada
-def boxplot_node(dataset: pd.DataFrame):
-    columns = dataset.columns.tolist()
-    boxplot(dataset, columns)
+# 3) Shape del conjunto de datos
+
 
 
 
