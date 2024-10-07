@@ -13,7 +13,7 @@ import os
 root_path = os.getcwd()
 
 # 1) Función de boxplots, toma un pandas DF  y una lista para generar secuencialmente una serie de boxplots
-def boxplot(dataset:pd.DataFrame, columns:list):
+def boxplot(dataset:pd.DataFrame, columns:list): # Importante, hay que indicarle
     # Importación de librería necesaria
     import matplotlib.pyplot as plt
 
@@ -25,7 +25,10 @@ def boxplot(dataset:pd.DataFrame, columns:list):
         plt.savefig(output_path)
         plt.close()
 
-    return output_path # Regresa esta imagen
+# 2) Segunda funcion, estoy simoplificando los parametros y dejandolo solo en funcion al set de datos de entrada
+def boxplot_node(dataset: pd.DataFrame):
+    columns = dataset.columns.tolist()
+    boxplot(dataset, columns)
 
 
 
