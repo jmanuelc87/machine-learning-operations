@@ -59,7 +59,11 @@ def boxplot_node(dataset:pd.DataFrame):
         print("Se guardo el siguiente archivo:", output_path)
         plt.close()
 
-# 3) Shape del conjunto de datos
+
+
+
+
+
 
 
 

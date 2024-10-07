@@ -18,7 +18,6 @@ rename = node(
 )
 
 # Kedro se encarga de pasar el dataset al primer parámetro de la función rename_node.
-
 # 1.2) Definir el nodo boxplot_node
 boxplot = node(
     func=boxplot_node,  # Función que será llamada en este nodo
