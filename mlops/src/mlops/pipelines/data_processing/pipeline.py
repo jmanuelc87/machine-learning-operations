@@ -4,7 +4,7 @@ generated using Kedro 0.19.8
 """
 
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import convert_to_csv
+from .nodes import convert_to_csv, rename_columns
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -15,7 +15,14 @@ def create_pipeline(**kwargs) -> Pipeline:
         name="convert_to_csv_node"
     )
     
+    rename_cols_node = node(
+        func=rename_columns,
+        inputs=["csv_energy_efficiency"],
+        outputs="csv_renamed_energy_efficiency",
+        name="rename_columns_node"
+    )
+    
     
     return pipeline(
-        pipe=[to_csv_node]
+        pipe=[to_csv_node, rename_cols_node]
     )

@@ -5,3 +5,7 @@ raw_energy_efficiency:
 csv_energy_efficiency:
   type: pandas.CSVDataset
   filepath: data/02_intermediate/ENB2012_data.csv
+
+csv_renamed_energy_efficiency:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/ENB2012_cols_renamed.csv
