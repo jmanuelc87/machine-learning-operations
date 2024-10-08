@@ -1,0 +1,7 @@
+raw_energy_efficiency:
+  type: pandas.ExcelDataset
+  filepath: data/01_raw/ENB2012_data.xlsx
+
+csv_energy_efficiency:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/ENB2012_data.csv
