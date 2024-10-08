@@ -14,6 +14,10 @@ correlations_energy_efficiency:
   type: pandas.ExcelDataset
   filepath: data/08_reporting/ENB2012_correlations.xlsx
 
+boxplot_energy_efficiency:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/ENB2012_boxplot.png
+
 correlations_plot_energy_efficiency:
   type: matplotlib.MatplotlibWriter
   filepath: data/08_reporting/ENB2012_correlations_plot.png

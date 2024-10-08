@@ -25,11 +25,16 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
     return renamed
 
 
-def calculate_correlations(df: pd.DataFrame) -> pd.DataFrame:
+def calculate_correlations(df: pd.DataFrame) -> tuple:
     correlations = df.corr(method='pearson')
     plt.figure(figsize=(14,11))
     sn.heatmap(correlations, annot=True)
     return correlations, plt
+
+
+def calculate_boxplots(df: pd.DataFrame):
+    df.plot(kind='box', subplots=True, layout=(4,4), sharex=False, sharey=False, figsize=(15,15))
+    return plt
 
 
 def split_train_test_dataset(df: pd.DataFrame, params) -> pd.DataFrame:
