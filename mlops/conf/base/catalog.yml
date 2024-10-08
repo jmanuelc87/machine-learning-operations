@@ -15,13 +15,9 @@ correlations_energy_efficiency:
   filepath: data/08_reporting/ENB2012_correlations.xlsx
 
 correlations_plot_energy_efficiency:
-  type: plotly.PlotlyDataset
-  filepath: data/08_reporting/ENB2012_correlations_plot.json
-  plotly_args:
-    type: imshow
-    imshow:
-      text_auto: True
-
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/ENB2012_correlations_plot.png
+  
 train_csv_energy_efficiency:
   type: pandas.CSVDataset
   filepath: data/02_model_input/ENB2012_train.csv

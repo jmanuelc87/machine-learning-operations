@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sn
 
 from sklearn.model_selection import train_test_split
 
@@ -25,7 +27,9 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 def calculate_correlations(df: pd.DataFrame) -> pd.DataFrame:
     correlations = df.corr(method='pearson')
-    return correlations, correlations
+    plt.figure(figsize=(14,11))
+    sn.heatmap(correlations, annot=True)
+    return correlations, plt
 
 
 def split_train_test_dataset(df: pd.DataFrame, params) -> pd.DataFrame:
