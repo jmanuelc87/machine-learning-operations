@@ -13,3 +13,11 @@ csv_renamed_energy_efficiency:
 correlations_energy_efficiency:
   type: pandas.ExcelDataset
   filepath: data/08_reporting/ENB2012_correlations.xlsx
+
+train_csv_energy_efficiency:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/ENB2012_train.csv
+
+test_csv_energy_efficiency:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/ENB2012_test.csv

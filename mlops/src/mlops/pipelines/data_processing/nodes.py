@@ -1,5 +1,6 @@
 import pandas as pd
 
+from sklearn.model_selection import train_test_split
 
 def convert_to_csv(df: pd.DataFrame) -> pd.DataFrame:
     return df
@@ -25,3 +26,8 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 def calculate_correlations(df: pd.DataFrame) -> pd.DataFrame:
     correlations = df.corr(method='pearson')
     return correlations
+
+
+def split_train_test_dataset(df: pd.DataFrame, params) -> pd.DataFrame:
+    train_df, test_df = train_test_split(df, test_size=params['test_size'], random_state=params['random_state'], shuffle=True)
+    return train_df, test_df

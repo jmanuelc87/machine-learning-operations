@@ -4,7 +4,7 @@ generated using Kedro 0.19.8
 """
 
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import convert_to_csv, rename_columns, calculate_correlations
+from .nodes import convert_to_csv, rename_columns, calculate_correlations, split_train_test_dataset
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -29,6 +29,13 @@ def create_pipeline(**kwargs) -> Pipeline:
         name="calculate_correlations_node"
     )
     
+    split_train_test_dataset_node = node(
+        func=split_train_test_dataset,
+        inputs=["csv_energy_efficiency", "params:root"],
+        outputs=["train_csv_energy_efficiency", "test_csv_energy_efficiency"],
+        name="split_train_test_dataset_node"
+    )
+    
     return pipeline(
-        pipe=[to_csv_node, rename_cols_node, calc_correlations_node]
+        pipe=[to_csv_node, rename_cols_node, calc_correlations_node, split_train_test_dataset_node]
     )
