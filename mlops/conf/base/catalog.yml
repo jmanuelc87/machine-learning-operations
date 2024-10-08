@@ -24,8 +24,8 @@ correlations_plot_energy_efficiency:
 
 train_csv_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_train.csv
+  filepath: data/02_model_input/ENB2012_train.csv
 
 test_csv_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_test.csv
+  filepath: data/02_model_input/ENB2012_test.csv
