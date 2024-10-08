@@ -25,7 +25,7 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 def calculate_correlations(df: pd.DataFrame) -> pd.DataFrame:
     correlations = df.corr(method='pearson')
-    return correlations
+    return correlations, correlations
 
 
 def split_train_test_dataset(df: pd.DataFrame, params) -> pd.DataFrame:

@@ -1,8 +1,3 @@
-"""
-This is a boilerplate pipeline 'data_processing'
-generated using Kedro 0.19.8
-"""
-
 from kedro.pipeline import Pipeline, pipeline, node
 from .nodes import convert_to_csv, rename_columns, calculate_correlations, split_train_test_dataset
 
@@ -25,7 +20,7 @@ def create_pipeline(**kwargs) -> Pipeline:
     calc_correlations_node = node(
         func=calculate_correlations,
         inputs=["csv_renamed_energy_efficiency"],
-        outputs="correlations_energy_efficiency",
+        outputs=["correlations_energy_efficiency", "correlations_plot_energy_efficiency"],
         name="calculate_correlations_node"
     )
     
