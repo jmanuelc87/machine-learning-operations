@@ -28,15 +28,15 @@ correlations_plot_energy_efficiency:
 
 cleaned_csv_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/03_primary/ENB2012_data.csv
+  filepath: data/03_primary/ENB2012_data_cleaned.csv
 
 "{namespace}.train_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_{namespace}_train.csv
+  filepath: data/05_model_input/ENB2012_{namespace}_train.csv
 
 "{namespace}.test_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_{namespace}_test.csv
+  filepath: data/05_model_input/ENB2012_{namespace}_test.csv
 
 "{namespace}.train_target_csv_energy_efficiency":
   type: pandas.CSVDataset
@@ -46,26 +46,14 @@ cleaned_csv_energy_efficiency:
   type: pandas.CSVDataset
   filepath: data/05_model_input/ENB2012_{namespace}_test_target.csv
 
-"{namespace}.train_scaled_csv_energy_efficiency":
+"{namespace}.scaled_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_scaled_{namespace}_train.csv
+  filepath: data/04_feature/ENB2012_scaled_{namespace}.csv
 
-"{namespace}.train_encoded_csv_energy_efficiency":
+"{namespace}.encoded_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_encoded_{namespace}_train.csv
+  filepath: data/04_feature/ENB2012_encoded_{namespace}.csv
 
-"{namespace}.train_processed_csv_energy_efficiency":
+"{namespace}.processed_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_processed_{namespace}_train.csv
-
-"{namespace}.test_scaled_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_scaled_{namespace}_test.csv
-
-"{namespace}.test_encoded_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_encoded_{namespace}_test.csv
-
-"{namespace}.test_processed_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_processed_{namespace}_test.csv
+  filepath: data/04_feature/ENB2012_processed_{namespace}.csv

@@ -1,6 +1,6 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
-from .nodes import convert_to_csv, rename_columns, feature_isolation_and_split, remove_null_values
+from .nodes import convert_to_csv, rename_columns, remove_null_values
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -27,22 +27,4 @@ def create_pipeline(**kwargs) -> Pipeline:
         )
     ])
     
-    feature_isolation_and_split_node = node(
-                        func=feature_isolation_and_split,
-                        inputs=["cleaned_csv_energy_efficiency", "params:root"],
-                        outputs=["train_csv_energy_efficiency", "test_csv_energy_efficiency", "train_target_csv_energy_efficiency", "test_target_csv_energy_efficiency"],
-                        name="feature_isolation_and_split_node")
-    
-    heating_pipeline = pipeline_modular(
-        pipe=[feature_isolation_and_split_node],
-        inputs=["cleaned_csv_energy_efficiency"],
-        namespace="heating"
-    )
-    
-    cooling_pipeline = pipeline_modular(
-        pipe=[feature_isolation_and_split_node],
-        inputs=["cleaned_csv_energy_efficiency"],
-        namespace="cooling"
-    )
-    
-    return base_pipeline + heating_pipeline + cooling_pipeline
+    return base_pipeline
