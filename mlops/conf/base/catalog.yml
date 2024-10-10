@@ -25,11 +25,23 @@ boxplot_energy_efficiency:
 correlations_plot_energy_efficiency:
   type: matplotlib.MatplotlibWriter
   filepath: data/08_reporting/ENB2012_correlations_plot.png
-  
-train_csv_energy_efficiency:
-  type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_train.csv
 
-test_csv_energy_efficiency:
+cleaned_csv_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_test.csv
+  filepath: data/03_primary/ENB2012_data.csv
+
+"{namespace}.train_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/05_model_input/ENB2012_{namespace}_train.csv
+
+"{namespace}.test_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/05_model_input/ENB2012_{namespace}_test.csv
+
+"{namespace}.train_target_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/05_model_input/ENB2012_{namespace}_train_target.csv
+
+"{namespace}.test_target_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/05_model_input/ENB2012_{namespace}_test_target.csv

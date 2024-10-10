@@ -1,3 +1,16 @@
-root:
+heating.root:
   test_size: 0.15
   random_state: 43
+  removed:
+    - Y1
+    - Y2
+  target:
+    - Y1
+cooling.root:
+  test_size: 0.15
+  random_state: 43
+  removed:
+    - Y1
+    - Y2
+  target:
+    - Y2
