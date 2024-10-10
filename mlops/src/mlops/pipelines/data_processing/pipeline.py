@@ -14,7 +14,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         
         node(
             func=rename_columns,
-            inputs=["csv_energy_efficiency"],
+            inputs=["csv_energy_efficiency", "params:rename_columns"],
             outputs="csv_renamed_energy_efficiency",
             name="rename_columns_node"
         ),

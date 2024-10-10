@@ -1,16 +1,27 @@
-heating.root:
-  test_size: 0.15
-  random_state: 43
-  removed:
+heating.root: 
+  test_size:  0.15
+  random_state:  43
+  removed: 
     - Y1
     - Y2
-  target:
+  target: 
     - Y1
-cooling.root:
-  test_size: 0.15
-  random_state: 43
-  removed:
+cooling.root: 
+  test_size:  0.15
+  random_state:  43
+  removed: 
     - Y1
     - Y2
-  target:
+  target: 
     - Y2
+rename_columns: 
+  X1: Compactness
+  X2: Surface Area
+  X3: Wall Area
+  X4: Roof Area
+  X5: Height
+  X6: Orientation
+  X7: Glazing Area
+  X8: Glazing Area dist
+  Y1: Heating load
+  Y2: Cooling load

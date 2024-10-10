@@ -8,19 +8,9 @@ def convert_to_csv(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
+def rename_columns(df: pd.DataFrame, params) -> pd.DataFrame:
     renamed = df[['X1','X2','X3','X4','X5','X6','X7','X8','Y1','Y2']] \
-        .rename({
-            'X1':'Compactness',
-            'X2':'Surface Area',
-            'X3':'Wall Area',
-            'X4':'Roof Area',
-            'X5':'Height',
-            'X6':'Orientation',
-            'X7':'Glazing Area',
-            'X8':'Glazing Area dist',
-            'Y1':'Heating load',
-            'Y2':'Cooling load'}, axis=1, inplace=False)
+        .rename(params, axis=1, inplace=False)
 
     return renamed
 
@@ -28,7 +18,7 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 def remove_null_values(df: pd.DataFrame) -> pd.DataFrame:
     values_df = df.isnull().sum()
     all = values_df.to_numpy()
-    if not np.sum(all) > 0:
+    if np.sum(all) == 0:
         return df
     else:
         df = df.dropna()
