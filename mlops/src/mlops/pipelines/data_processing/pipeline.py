@@ -1,5 +1,5 @@
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import convert_to_csv, rename_columns, calculate_correlations, calculate_boxplots, split_train_test_dataset
+from .nodes import convert_to_csv, rename_columns, calculate_correlations, calculate_stats, calculate_boxplots, split_train_test_dataset
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -24,6 +24,13 @@ def create_pipeline(**kwargs) -> Pipeline:
         name="calculate_correlations_node"
     )
     
+    calc_stats_node = node(
+        func=calculate_stats,
+        inputs=["csv_renamed_energy_efficiency"],
+        outputs="stats_energy_efficiency",
+        name="calc_stats_node"
+    )
+    
     calculate_boxplots_node = node(
         func=calculate_boxplots,
         inputs=["csv_renamed_energy_efficiency"],
@@ -39,5 +46,5 @@ def create_pipeline(**kwargs) -> Pipeline:
     )
     
     return pipeline(
-        pipe=[to_csv_node, rename_cols_node, calc_correlations_node, calculate_boxplots_node, split_train_test_dataset_node]
+        pipe=[to_csv_node, rename_cols_node, calc_correlations_node, calc_stats_node, calculate_boxplots_node, split_train_test_dataset_node]
     )
