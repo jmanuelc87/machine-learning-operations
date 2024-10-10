@@ -1,0 +1,23 @@
+heating.features:
+  scaling:
+    - X1
+    - X2
+    - X3
+    - X4
+  encoding:
+    - X5
+    - X6
+    - X7
+    - X8
+
+cooling.features:
+  scaling:
+    - X1
+    - X2
+    - X3
+    - X4
+  encoding:
+    - X5
+    - X6
+    - X7
+    - X8

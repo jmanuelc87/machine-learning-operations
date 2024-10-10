@@ -32,11 +32,11 @@ cleaned_csv_energy_efficiency:
 
 "{namespace}.train_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_{namespace}_train.csv
+  filepath: data/04_feature/ENB2012_{namespace}_train.csv
 
 "{namespace}.test_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_{namespace}_test.csv
+  filepath: data/04_feature/ENB2012_{namespace}_test.csv
 
 "{namespace}.train_target_csv_energy_efficiency":
   type: pandas.CSVDataset
@@ -45,3 +45,27 @@ cleaned_csv_energy_efficiency:
 "{namespace}.test_target_csv_energy_efficiency":
   type: pandas.CSVDataset
   filepath: data/05_model_input/ENB2012_{namespace}_test_target.csv
+
+"{namespace}.train_scaled_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/04_feature/ENB2012_scaled_{namespace}_train.csv
+
+"{namespace}.train_encoded_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/04_feature/ENB2012_encoded_{namespace}_train.csv
+
+"{namespace}.train_processed_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/05_model_input/ENB2012_processed_{namespace}_train.csv
+
+"{namespace}.test_scaled_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/04_feature/ENB2012_scaled_{namespace}_test.csv
+
+"{namespace}.test_encoded_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/04_feature/ENB2012_encoded_{namespace}_test.csv
+
+"{namespace}.test_processed_csv_energy_efficiency":
+  type: pandas.CSVDataset
+  filepath: data/05_model_input/ENB2012_processed_{namespace}_test.csv

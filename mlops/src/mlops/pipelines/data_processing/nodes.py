@@ -16,13 +16,7 @@ def rename_columns(df: pd.DataFrame, params) -> pd.DataFrame:
 
 
 def remove_null_values(df: pd.DataFrame) -> pd.DataFrame:
-    values_df = df.isnull().sum()
-    all = values_df.to_numpy()
-    if np.sum(all) == 0:
-        return df
-    else:
-        df = df.dropna()
-        return df
+    return df.dropna()
 
 
 def feature_isolation_and_split(df: pd.DataFrame, params):
