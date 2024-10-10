@@ -57,3 +57,7 @@ cleaned_csv_energy_efficiency:
 "{namespace}.processed_csv_energy_efficiency":
   type: pandas.CSVDataset
   filepath: data/04_feature/ENB2012_processed_{namespace}.csv
+
+"{namespace}.model_results":
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/ENB2012_model_results_{namespace}.csv

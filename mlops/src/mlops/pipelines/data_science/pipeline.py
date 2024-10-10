@@ -1,7 +1,8 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
 
-from .nodes import feature_standard_scaling, feature_encoding, feature_isolation_and_split, feature_merge
+from .nodes import feature_standard_scaling, feature_encoding, feature_isolation_and_split, feature_merge, train_evaluate_model
+
 
 def create_pipeline(**kwargs) -> Pipeline:
     nodes = [
@@ -27,17 +28,27 @@ def create_pipeline(**kwargs) -> Pipeline:
             func=feature_isolation_and_split,
             inputs=["processed_csv_energy_efficiency", "csv_energy_efficiency", "params:features"],
             outputs=["train_csv_energy_efficiency", "test_csv_energy_efficiency", "train_target_csv_energy_efficiency", "test_target_csv_energy_efficiency"],
-            name="feature_isolation_and_split_node")
+            name="feature_isolation_and_split_node"),
+    ]
+    
+    
+    train_evaluate_model_nodes = [
+        node(
+            func=train_evaluate_model,
+            inputs=["train_csv_energy_efficiency", "train_target_csv_energy_efficiency", "params:features"],
+            outputs="model_results",
+            name="train_evaluate_model_node"
+        )
     ]
     
     heating_train_pipeline = pipeline_modular(
-        pipe=nodes,
+        pipe=nodes + train_evaluate_model_nodes,
         inputs={"csv_energy_efficiency": "cleaned_csv_energy_efficiency"},
         namespace="heating"
     )
     
     cooling_train_pipeline = pipeline_modular(
-        pipe=nodes,
+        pipe=nodes + train_evaluate_model_nodes,
         inputs={"csv_energy_efficiency": "cleaned_csv_energy_efficiency"},
         namespace="cooling"
     )

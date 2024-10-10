@@ -13,6 +13,10 @@ heating.features:
     - X6
     - X7
     - X8
+  use_model: LinearRegression
+  model:
+    params:
+      n_jobs: -1
 
 cooling.features:
   test_size:  0.15
@@ -29,6 +33,10 @@ cooling.features:
     - X6
     - X7
     - X8
+  use_model: LinearRegression
+  model:
+    params:
+      n_jobs: -1
 
 both.features:
   test_size:  0.15
@@ -46,3 +54,7 @@ both.features:
     - X6
     - X7
     - X8
+  use_model: LinearRegression
+  model:
+    params:
+      n_jobs: -1

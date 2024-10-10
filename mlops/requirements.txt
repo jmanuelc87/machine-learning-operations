@@ -10,3 +10,4 @@ scikit-learn~=1.5.1; python_version >= "3.9"
 scikit-learn<=1.4.0,>=1.0; python_version < "3.9"
 openpyxl==3.1.5
 category-encoders==2.6.4
+xgboost==2.1.1
