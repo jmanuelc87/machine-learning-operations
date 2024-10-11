@@ -1,3 +1,7 @@
+# MLOps
+
+[![Python version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://pypi.org/project/kedro/)
+[![Powered by Kedro](https://img.shields.io/badge/powered_by-kedro-ffc900?logo=kedro)](https://kedro.org)
 ## INTRODUCCIÓN
 
 
@@ -8,16 +12,19 @@ se obtuvieron 768 formas de edificios en distintos entornos de ejecución, los e
 
 El link del dataset se encuentra en : https://archive.ics.uci.edu/dataset/242/energy+efficiency 
 
+La siguente imagen describe las variables del archvivo:
+<img width="935" alt="image" src="https://github.com/user-attachments/assets/80106791-b69a-4c02-8e93-a80bcd6f3bc3">
+
 
 ## NECESIDAD
 
 Este proyecto se realiza debido a que es necesario poder evaluar y afianzar las capacidades de los miembros del equipo en el desarrollo de pipelines de ML, deben estar preparados para abordar diferentes tareas como: 
 
-Manipulación y preparación de datos.
-Exploración y preprocesamiento de datos.
-Uso de técnicas de versionado de datos.
-Construcción y evaluación de modelos de ML.
-Desarrollo y estructuración de modelos de ML y desarrollo de pipelines aplicando buenas prácticas.
+* Manipulación y preparación de datos.
+* Exploración y preprocesamiento de datos.
+* Uso de técnicas de versionado de datos.
+* Construcción y evaluación de modelos de ML.
+* Desarrollo y estructuración de modelos de ML y desarrollo de pipelines aplicando buenas prácticas.
 
 El proyecto será evaluado y revisado por la plana docente del curso de MLOps del Tecnológico de Monterrey
 
@@ -57,16 +64,17 @@ Para descargar y trabajar en una copia local, se debe seguir los siguientes paso
 
 Previamente, se debe descargar a la máquina que ejecutará el código, las siguientes herramientas: 
  
---Python  
---Programa editor de Texto (VS Code)
---Git
+* Python  
+* Programa editor de Texto (VS Code, PyCharm)
+* Git
 
 ### DESCARGA
 
 1. Clonar el repositorio
 
 Para descargar una copia del proyecto abrir una consola de Git y ejecutar el comando: 
-git clone https://github.com/jmanuelc87/machine-learning-operations.git 
+
+`git clone https://github.com/jmanuelc87/machine-learning-operations.git `
 
 ### EJECUCIÓN
 
