@@ -49,7 +49,7 @@ Para el cumplimiento del objetivo, se desarrolló un proceso compuesto de los no
 
 ![alt text](https://github.com/jmanuelc87/machine-learning-operations/blob/Avance_EmilySedan/mlops/images/kedro.jpeg)
 
-## INSTALACIÓN
+## INICIO DE INSTALACIÓN 
 
 Para descargar y trabajar en una copia local, se debe seguir los siguientes pasos: 
 
@@ -61,7 +61,7 @@ Previamente, se debe descargar a la máquina que ejecutará el código, las sigu
 --Programa editor de Texto (VS Code)
 --Git
 
-### INSTALACIÓN
+### DESCARGA
 
 1. Clonar el repositorio
 
