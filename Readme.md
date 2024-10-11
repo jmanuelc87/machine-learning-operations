@@ -25,7 +25,7 @@ El proyecto será evaluado y revisado por la plana docente del curso de MLOps de
 ## TECNOLOGÍAS UTILIZADAS
 
 - Python
-- Yaml
+- Archivos de configuración yaml
 - Xml
 - Kedro
 - MLflow
