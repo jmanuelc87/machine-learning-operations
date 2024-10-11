@@ -78,12 +78,12 @@ PENDIENTE ESCRIBIR
 
 El equipo está conformado por los siguientes miembros: 
 
---Orlando Marath Barraza Aguilar
---Juan Manuel Carballo Montaño
---Luis Miguel Farfán Lara
---Didier Omar Gamboa Angulo
---Jorge Luis Pedroza Rivera
---Emily Ann Sedán Herrera
+* Orlando Marath Barraza Aguilar
+* Juan Manuel Carballo Montaño
+* Luis Miguel Farfán Lara
+* Didier Omar Gamboa Angulo
+* Jorge Luis Pedroza Rivera
+* Emily Ann Sedán Herrera
 
 
 La forma de interacción y coordinación es de manera digital, haciendo uso de grupos de Whatsapp, reuniones virtuales y empleando herramientas de trabajo colaborativo.
