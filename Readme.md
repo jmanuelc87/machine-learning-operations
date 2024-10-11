@@ -47,7 +47,7 @@ El notebook donde se puede revisar este código se encuentra en: https://github.
 
 Para el cumplimiento del objetivo, se desarrolló un proceso compuesto de los nodos de la imagen: 
 
-![alt text](/images/kedro.jpeg)
+![alt text](https://github.com/jmanuelc87/machine-learning-operations/blob/Avance_EmilySedan/mlops/images/kedro.jpeg)
 
 ## INSTALACIÓN
 
