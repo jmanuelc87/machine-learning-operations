@@ -53,10 +53,4 @@ def create_pipeline(**kwargs) -> Pipeline:
         namespace="cooling"
     )
     
-    both_train_pipeline = pipeline_modular(
-        pipe=nodes,
-        inputs={"csv_energy_efficiency": "cleaned_csv_energy_efficiency"},
-        namespace="both"
-    )
-    
-    return heating_train_pipeline + cooling_train_pipeline + both_train_pipeline
+    return heating_train_pipeline + cooling_train_pipeline
