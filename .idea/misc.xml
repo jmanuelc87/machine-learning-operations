@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Data_Science" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Data_Science" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="machine-learning-operations" project-jdk-type="Python SDK" />
 </project>
