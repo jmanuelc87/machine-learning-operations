@@ -173,5 +173,7 @@ mlops/session_store.db
 mlops/notebooks/mlruns/
 
 
+# Adding this file 
+.DS_Store 
 
 
