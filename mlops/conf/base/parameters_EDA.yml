@@ -3,3 +3,8 @@
 #
 # Documentation for this file format can be found in "Parameters"
 # Link: https://docs.kedro.org/en/0.19.9/configuration/parameters.html
+
+
+
+# NOTA: Cada pipeline genera automaticamente un archivo de parámetros.  En este caso vamos a definir la dirección de lectura de nuestros datos
+raw_data_filepath: "/home/jupyter/orlando/machine-learning-operations/mlops/data/01_raw"
