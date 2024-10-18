@@ -175,5 +175,5 @@ mlops/notebooks/mlruns/
 
 # Adding this file 
 .DS_Store 
-
+DS_Store 
 
