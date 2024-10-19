@@ -12,7 +12,7 @@ from .nodes import boxplot_node, rename_node
 # 1.1) Definir el nodo rename_node
 rename = node(
     func=rename_node,  # Función que será llamada en este nodo
-    inputs="raw_data",  # Set de datos de entrada, tal como se indica en el catálogo
+    inputs="raw_energy_efficiency",  # Set de datos de entrada, tal como se indica en el catálogo
     outputs="renamed_data",  # Set de datos de salida, también definido en el catálogo
     name="rename_node"  # Nombre del nodo para identificarlo en el pipeline
 )
@@ -29,10 +29,11 @@ boxplot = node(
 
 # 2) Integración de nodos
 def create_pipeline(**kwargs):
-    return Pipeline(
-        [
-            rename,  # Integramos el nodo rename_node
-            boxplot  # Integramos el nodo boxplot_node
-        ]
-    )
+    return Pipeline([])
+    # return Pipeline(
+    #     [
+    #         rename,  # Integramos el nodo rename_node
+    #         boxplot  # Integramos el nodo boxplot_node
+    #     ]
+    # )
 

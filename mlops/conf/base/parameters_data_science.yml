@@ -1,60 +1,17 @@
-heating.features:
-  test_size:  0.15
-  random_state:  43
-  target: 
-    - Y1
-  scaling:
-    - X1
-    - X2
-    - X3
-    - X4
-  encoding:
-    - X5
-    - X6
-    - X7
-    - X8
-  use_model: LinearRegression
-  model:
-    params:
-      n_jobs: -1
-
-cooling.features:
-  test_size:  0.15
-  random_state:  43
-  target: 
-    - Y2
-  scaling:
-    - X1
-    - X2
-    - X3
-    - X4
-  encoding:
-    - X5
-    - X6
-    - X7
-    - X8
-  use_model: LinearRegression
-  model:
-    params:
-      n_jobs: -1
-
-both.features:
-  test_size:  0.15
-  random_state:  43
-  target:
-    - Y1 
-    - Y2
-  scaling:
-    - X1
-    - X2
-    - X3
-    - X4
-  encoding:
-    - X5
-    - X6
-    - X7
-    - X8
-  use_model: LinearRegression
-  model:
-    params:
-      n_jobs: -1
+data_science:
+  heating:
+    features:
+      test_size:  0.15
+      random_state:  42
+  processing:
+    features:
+      scaling:
+        - X1
+        - X2
+        - X3
+        - X4
+      encoding:
+        - X5
+        - X6
+        - X7
+        - X8

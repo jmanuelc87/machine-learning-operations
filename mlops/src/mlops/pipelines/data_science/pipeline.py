@@ -1,10 +1,20 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
 
-from .nodes import feature_standard_scaling, feature_encoding, feature_isolation_and_split, feature_merge, train_evaluate_model
+from .nodes import feature_standard_scaling, feature_encoding, feature_merge, separate_targets, features_train_test_split
 
 
 def create_pipeline(**kwargs) -> Pipeline:
+    separate_targets_node = node(
+        func=separate_targets,
+        inputs=["csv_separate_energy_efficiency"],
+        outputs=["csv_features_energy_efficiency", "csv_target_heating_energy_efficiency", "csv_target_cooling_energy_efficiency"]
+    )
+    
+    separate_targets_pipe = pipeline(
+        [separate_targets_node]
+    )
+    
     nodes = [
         node(
             func=feature_standard_scaling,
@@ -21,36 +31,48 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(
             func=feature_merge,
             inputs=["scaled_csv_energy_efficiency", "encoded_csv_energy_efficiency"],
-            outputs="processed_csv_energy_efficiency",
+            outputs="merged_csv_energy_efficiency",
             name="feature_merge_node"
-        ),
-        node(
-            func=feature_isolation_and_split,
-            inputs=["processed_csv_energy_efficiency", "csv_energy_efficiency", "params:features"],
-            outputs=["train_csv_energy_efficiency", "test_csv_energy_efficiency", "train_target_csv_energy_efficiency", "test_target_csv_energy_efficiency"],
-            name="feature_isolation_and_split_node"),
-    ]
-    
-    
-    train_evaluate_model_nodes = [
-        node(
-            func=train_evaluate_model,
-            inputs=["train_csv_energy_efficiency", "train_target_csv_energy_efficiency", "params:features"],
-            outputs="model_results",
-            name="train_evaluate_model_node"
         )
     ]
     
-    heating_train_pipeline = pipeline_modular(
-        pipe=nodes + train_evaluate_model_nodes,
-        inputs={"csv_energy_efficiency": "cleaned_csv_energy_efficiency"},
+    processing_pipe = pipeline_modular(
+        pipe=nodes,
+        inputs={
+            "csv_energy_efficiency": "csv_features_energy_efficiency"
+        },
+        namespace="processing"
+    )
+    
+    features_train_test_split_node = node(
+            func=features_train_test_split,
+            inputs=["csv_energy_efficiency", "csv_target_energy_efficiency", "params:features"],
+            outputs=["csv_energy_efficiency_train", "csv_energy_efficiency_test", "csv_target_energy_efficiency_train", "csv_target_energy_efficiency_test"]
+        )
+    
+    heating_split_pipe = pipeline_modular(
+        pipe=[features_train_test_split_node],
+        inputs={
+            "csv_energy_efficiency":"processing.merged_csv_energy_efficiency",
+            "csv_target_energy_efficiency": "csv_target_heating_energy_efficiency"
+        },
         namespace="heating"
     )
     
-    cooling_train_pipeline = pipeline_modular(
-        pipe=nodes + train_evaluate_model_nodes,
-        inputs={"csv_energy_efficiency": "cleaned_csv_energy_efficiency"},
+    cooling_split_pipe = pipeline_modular(
+        pipe=[features_train_test_split_node],
+        inputs={
+            "csv_energy_efficiency":"processing.merged_csv_energy_efficiency",
+            "csv_target_energy_efficiency": "csv_target_cooling_energy_efficiency"
+        },
         namespace="cooling"
     )
     
-    return heating_train_pipeline + cooling_train_pipeline
+    data_science_pipe = pipeline_modular(
+        pipe=[separate_targets_pipe + processing_pipe + heating_split_pipe + cooling_split_pipe],
+        inputs={
+            "csv_separate_energy_efficiency": "data_processing.csv_energy_efficiency"
+        },
+        namespace="data_science")
+    
+    return data_science_pipe

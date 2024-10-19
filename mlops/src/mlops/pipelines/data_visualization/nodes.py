@@ -12,7 +12,7 @@ def calculate_correlations(df: pd.DataFrame) -> tuple:
     correlations = df.corr(method='pearson')
     plt.figure(figsize=(14,11))
     sn.heatmap(correlations, annot=True)
-    return correlations, plt
+    return plt
 
 
 def calculate_boxplots(df: pd.DataFrame):

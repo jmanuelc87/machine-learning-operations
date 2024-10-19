@@ -1,63 +1,93 @@
 raw_energy_efficiency:
   type: pandas.ExcelDataset
   filepath: data/01_raw/ENB2012_data.xlsx
+  metadata:
+    kedro-viz:
+      layer: raw
 
-csv_energy_efficiency:
+
+
+"{namespace}.csv_energy_efficiency":
   type: pandas.CSVDataset
   filepath: data/02_intermediate/ENB2012_data.csv
+  metadata:
+    kedro-viz:
+      layer: intermediate
 
-csv_renamed_energy_efficiency:
+"{namespace}.csv_renamed_energy_efficiency":
   type: pandas.CSVDataset
   filepath: data/02_intermediate/ENB2012_cols_renamed.csv
+  metadata:
+    kedro-viz:
+      layer: intermediate
 
-stats_energy_efficiency:
-  type: pandas.ExcelDataset
-  filepath: data/08_reporting/ENB2012_stats.xlsx
 
-correlations_energy_efficiency:
-  type: pandas.ExcelDataset
-  filepath: data/08_reporting/ENB2012_correlations.xlsx
 
-boxplot_energy_efficiency:
-  type: matplotlib.MatplotlibWriter
-  filepath: data/08_reporting/ENB2012_boxplot.png
-
-correlations_plot_energy_efficiency:
-  type: matplotlib.MatplotlibWriter
-  filepath: data/08_reporting/ENB2012_correlations_plot.png
-
-cleaned_csv_energy_efficiency:
+csv_features_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/03_primary/ENB2012_data_cleaned.csv
+  filepath: data/02_intermediate/ENB2012_features.csv
+  metadata:
+    kedro-viz:
+      layer: intermediate
 
-"{namespace}.train_csv_energy_efficiency":
+csv_target_heating_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_{namespace}_train.csv
+  filepath: data/02_intermediate/ENB2012_target_heating.csv
+  metadata:
+    kedro-viz:
+      layer: intermediate
 
-"{namespace}.test_csv_energy_efficiency":
+csv_target_cooling_energy_efficiency:
   type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_{namespace}_test.csv
+  filepath: data/02_intermediate/ENB2012_target_cooling.csv
+  metadata:
+    kedro-viz:
+      layer: intermediate
 
-"{namespace}.train_target_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_{namespace}_train_target.csv
 
-"{namespace}.test_target_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/05_model_input/ENB2012_{namespace}_test_target.csv
 
 "{namespace}.scaled_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_scaled_{namespace}.csv
+  filepath: data/03_primary/ENB2012_scaled.csv
+  metadata:
+    kedro-viz:
+      layer: primary
 
 "{namespace}.encoded_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_encoded_{namespace}.csv
+  filepath: data/03_primary/ENB2012_encoded.csv
+  metadata:
+    kedro-viz:
+      layer: primary
 
-"{namespace}.processed_csv_energy_efficiency":
+"{namespace}.merged_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/04_feature/ENB2012_processed_{namespace}.csv
+  filepath: data/02_primary/ENB2012_merged.csv
+  metadata:
+    kedro-viz:
+      layer: primary
 
-"{namespace}.model_results":
-  type: pandas.CSVDataset
-  filepath: data/08_reporting/ENB2012_model_results_{namespace}.csv
+
+
+
+"{namespace}.stats_energy_efficiency":
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/ENB2012_stats.xlsx
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+"{namespace}.boxplot_energy_efficiency":
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/ENB2012_boxplot.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+"{namespace}.correlations_plot_energy_efficiency":
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/ENB2012_correlations_plot.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+
