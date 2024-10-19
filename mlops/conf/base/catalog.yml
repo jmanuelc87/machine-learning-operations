@@ -25,3 +25,10 @@ histograms:
   filepath: data/02_intermediate/EDA/histograms.png
   save_args:
     format: png
+    
+# 6) Boxplots 
+boxplots:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/02_intermediate/EDA/boxplots.png
+  save_args:
+    format: png

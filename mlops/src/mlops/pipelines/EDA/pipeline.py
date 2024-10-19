@@ -3,7 +3,7 @@ This is a boilerplate pipeline 'EDA'
 generated using Kedro 0.19.9
 """
 from kedro.pipeline import Pipeline, node
-from .nodes import load_data, rename_columns, get_data_shape, descriptive_statistics, histograms  # Import all necessary functions
+from .nodes import  * # importamos las funciones      #load_data, rename_columns, get_data_shape, descriptive_statistics, histograms  # Import all necessary functions
 
 
 #######################             DEFINICION DEL PIPELINE DE EJUCION DE EDA           ###################
@@ -49,6 +49,13 @@ histograms  = node(
     outputs= "histograms",  # Reference the catalog output
     name= "Histograms")
 
+# 1.6) Nodo de histogramas 
+boxplots = node(
+    func= boxplots,
+    inputs= "renamed_dataset", # Toma un set de datos como input, declarado en el catalogo 
+    outputs= "boxplots",  # Reference the catalog output
+    name= "boxplots")
+
 
 # 2) Integrate nodes
 def create_pipeline(**kwargs) -> Pipeline:
@@ -58,6 +65,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             rename,
             shape,
             description , 
-            histograms
+            histograms, 
+            boxplots
         ]
     )

@@ -4,7 +4,7 @@ generated using Kedro 0.19.9
 """
 
 
-#######################                          ANALISIS EXPLORATORIO DE DATOS                  ###########################
+#######################                     ANALISIS EXPLORATORIO DE DATOS  (EDA)                 ###########################
                         
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -95,3 +95,47 @@ def histograms (dataset:pd.DataFrame):
     plt.savefig(export_path + "/histograms.png", format="png", dpi=300, bbox_inches='tight')    
     
     return plt
+
+
+# 6) Generación de boxplots
+def boxplots (dataset: pd.DataFrame):
+    # Boxplot 
+    columns = 2  # Number of plots per row
+    rows = (len(dataset.columns) + columns - 1) // columns  # Calculate the necessary number of rows
+
+    # Create the grid of subplots
+    fig, axes = plt.subplots(nrows = rows, ncols=columns, figsize=(10, 18))
+
+    # Flatten the axes array for easier iteration
+    axes = axes.flatten()
+
+    # Plot each column's boxplot in its corresponding subplot
+    for i, col in enumerate(dataset.columns):
+        dataset.boxplot(column=col, ax=axes[i])
+        axes[i].set_title(f'Boxplot of {col}')
+
+    # Remove any unused subplots if the number of columns doesn't fit perfectly
+    for j in range(i + 1, len(axes)):
+        fig.delaxes(axes[j])
+
+    # Adjust layout to prevent overlap
+    plt.tight_layout()
+    
+     # 6.2) Save the figure as PNG
+    import os
+
+    # Obtención del directorio base, es la dirección base del proyecto 
+    root_path = os.getcwd()
+    
+    # Definir la ruta de exportación, en la ejecución 
+    export_path = root_path + "/data/02_intermediate/EDA"
+    
+    # Comprobar si la carpeta existe, y si no, crearla
+    if not os.path.exists(export_path):
+        os.makedirs(export_path)
+    
+    plt.savefig(export_path + "/boxplots.png", format="png", dpi=300, bbox_inches='tight')    
+    
+    return plt
+  
+
