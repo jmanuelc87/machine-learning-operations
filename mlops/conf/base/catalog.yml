@@ -32,3 +32,10 @@ boxplots:
   filepath: data/02_intermediate/EDA/boxplots.png
   save_args:
     format: png
+    
+# 7) Heatmap 
+heatmap:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/02_intermediate/EDA/heatmap.png
+  save_args:
+    format: png

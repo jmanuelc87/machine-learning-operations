@@ -139,3 +139,38 @@ def boxplots (dataset: pd.DataFrame):
     return plt
   
 
+    
+# 7) Heatmap correlación de pearson 
+def heatmap (data:pd.DataFrame): 
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+
+    # Calcular la matriz de correlación
+    correlation_matrix = data.corr(method="pearson")
+
+    # Crear el heatmap
+    plt.figure(figsize=(10, 8))  # Ajusta el tamaño de la figura si es necesario
+    sns.heatmap(data=correlation_matrix, annot=True, cmap="coolwarm", linewidths=0.5)
+
+    # Agregar un título
+    plt.title("Heatmap de la matriz de correlación", fontsize=16)
+    
+   # 7.2) Save the figure as PNG
+    import os
+
+    # Obtención del directorio base, es la dirección base del proyecto 
+    root_path = os.getcwd()
+    
+    # Definir la ruta de exportación, en la ejecución 
+    export_path = root_path + "/data/02_intermediate/EDA"
+    
+    # Comprobar si la carpeta existe, y si no, crearla
+    if not os.path.exists(export_path):
+        os.makedirs(export_path)
+    
+    plt.savefig(export_path + "/heatmap.png", format="png", dpi=300, bbox_inches='tight')    
+    
+    return plt
+  
+
+  
