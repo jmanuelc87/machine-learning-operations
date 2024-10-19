@@ -62,7 +62,7 @@ csv_target_cooling_energy_efficiency:
 
 "{namespace}.merged_csv_energy_efficiency":
   type: pandas.CSVDataset
-  filepath: data/02_primary/ENB2012_merged.csv
+  filepath: data/03_primary/ENB2012_merged.csv
   metadata:
     kedro-viz:
       layer: primary
@@ -91,3 +91,25 @@ csv_target_cooling_energy_efficiency:
     kedro-viz:
       layer: reporting
 
+
+
+"{namespace}.linear-regression_r2_score":
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/ENB2012_lr_r2_score_{namespace}.csv
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+"{namespace}.random-forest_r2_score":
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/ENB2012_rf_r2_score_{namespace}.csv
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+"{namespace}.xgboost_r2_score":
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/ENB2012_xg_r2_score_{namespace}.csv
+  metadata:
+    kedro-viz:
+      layer: reporting
