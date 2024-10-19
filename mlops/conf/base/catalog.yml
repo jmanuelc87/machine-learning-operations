@@ -2,16 +2,26 @@
 ## En el catalogo se definen el tipo de datos que estaremos utiliznado en distintas etapas del pipeline 
 
 # 1) raw_data. Este set de datos es el que utilizamoes al inicio y es un tipo de set de datos de pandas 
-
 raw_dataset:
-  type: pandas.ExcelDataSet
-  filepath: ${parameters_EDA.raw_data_filepath} # Espesiciamos el camino del set de datos 
+  type: MemoryDataset 
 
 renamed_dataset:
-  type: MemoryDataSet
+  type: MemoryDataset 
 
 data_shape:
-  type: MemoryDataSet
+  type: MemoryDataset 
 
 data_types:
-  type: MemoryDataSet
+  type: MemoryDataset 
+  
+# 4) Excel exportado en la funcion de descriptive_statistics
+descriptive_statistics_excel:
+  type: pandas.ExcelDataset
+  filepath: data/02_intermediate/EDA/estadistica_descriptiva.xlsx
+  
+# 5) Histogramas exportados
+histograms:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/02_intermediate/EDA/histograms.png
+  save_args:
+    format: png
