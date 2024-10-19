@@ -14,28 +14,48 @@ data_shape:
 data_types:
   type: MemoryDataset 
   
-# 4) Excel exportado en la funcion de descriptive_statistics
+# 5) Excel exportado en la funcion de descriptive_statistics
 descriptive_statistics_excel:
   type: pandas.ExcelDataset
   filepath: data/02_intermediate/EDA/estadistica_descriptiva.xlsx
   
-# 5) Histogramas exportados
+# 6) Histogramas exportados
 histograms:
   type: matplotlib.MatplotlibWriter
   filepath: data/02_intermediate/EDA/histograms.png
   save_args:
     format: png
     
-# 6) Boxplots 
+# 7) Boxplots 
 boxplots:
   type: matplotlib.MatplotlibWriter
   filepath: data/02_intermediate/EDA/boxplots.png
   save_args:
     format: png
     
-# 7) Heatmap 
+# 8) Heatmap 
 heatmap:
   type: matplotlib.MatplotlibWriter
   filepath: data/02_intermediate/EDA/heatmap.png
   save_args:
     format: png
+    
+    
+# 9) Declaración de outputs del nodo de datasplit 
+X_train:
+  type: MemoryDataset 
+
+X_test:
+  type: MemoryDataset 
+
+cooling_train:
+  type: MemoryDataset 
+
+cooling_test:
+  type: MemoryDataset
+
+heating_train:
+  type: MemoryDataset 
+
+heating_test:                                                     
+  type: MemoryDataset 
