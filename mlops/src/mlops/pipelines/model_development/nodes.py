@@ -48,7 +48,7 @@ def selection_best_params(X: pd.DataFrame, y: pd.DataFrame, params):
         estimator=_model,
         param_grid=params['best_model_params'],
         scoring=params['metric'],
-        cv=6,
+        cv=4,
         n_jobs=-1,
         verbose=0
     )
