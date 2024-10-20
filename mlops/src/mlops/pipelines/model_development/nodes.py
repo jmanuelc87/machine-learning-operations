@@ -40,7 +40,7 @@ def train_and_evaluate_model(X: pd.DataFrame, y:pd.DataFrame, model, params) -> 
 
 def selection_best_params(X: pd.DataFrame, y: pd.DataFrame, params):
     mlflow.set_tracking_uri("http://127.0.0.1:5000")
-    mlflow.set_experiment("Energy_Efficiency")
+    mlflow.set_experiment("JuanManuel_Energy_Efficiency")
     
     SelectedModel = model_dict[params['best_model']]
     _model = SelectedModel()    
