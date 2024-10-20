@@ -1,10 +1,12 @@
 import mlflow
+import numpy as np
 import pandas as pd
 
-from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.model_selection import GridSearchCV, cross_val_score
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
+
 
 model_dict = {
     "linear-regression": LinearRegression,
@@ -12,10 +14,18 @@ model_dict = {
     "xgboost": XGBRegressor
 }
 
+def _log_mlflow(metric_name, score, model_name, model_params, estimator, input):
+    mlflow.log_params(model_params)
+    mlflow.log_metric(metric_name, score)
+    if model_name != 'xgboost':
+        mlflow.sklearn.log_model(sk_model=estimator, input_example=input, artifact_path=model_name)
+    else:
+        mlflow.xgboost.log_model(xgb_model=estimator, input_example=input, artifact_path=model_name)
+
 
 def train_and_evaluate_model(X: pd.DataFrame, y:pd.DataFrame, model, params) -> pd.DataFrame:
     SelectedModel = model_dict[model]
-    selected_model = SelectedModel(**params[model])
+    selected_model = SelectedModel(**params[model])    
     scores = cross_val_score(
             estimator=selected_model,
             X=X,
@@ -33,26 +43,18 @@ def selection_best_params(X: pd.DataFrame, y: pd.DataFrame, params):
     mlflow.set_experiment("Energy_Efficiency")
     
     SelectedModel = model_dict[params['best_model']]
-    
-    _model = SelectedModel()
+    _model = SelectedModel()    
     grid_search = GridSearchCV(
         estimator=_model,
         param_grid=params['best_model_params'],
+        scoring=params['metric'],
         cv=6,
         n_jobs=-1,
-        verbose=1
+        verbose=0
     )
-
-    grid_search.fit(X=X, y=y)
-
-    with mlflow.start_run():
-
-        mlflow.log_params(grid_search.best_params_)
-        mlflow.log_metric("r2", grid_search.best_score_)
-
-        if params['best_model'] != 'xgboost':
-            mlflow.sklearn.log_model(sk_model=grid_search.best_estimator_, input_example=X, artifact_path=params['best_model'])
-        else:
-            mlflow.xgboost.log_model(xgb_model=grid_search.best_estimator_, input_example=X, artifact_path=params['best_model'])
-
-    return grid_search.best_estimator_
+    
+    with mlflow.start_run(tags=params['tags']):
+        grid_search.fit(X, y)
+        _log_mlflow(params['metric'], grid_search.best_score_, params['best_model'], grid_search.best_params_, grid_search.best_estimator_, X)
+    
+    return _model
