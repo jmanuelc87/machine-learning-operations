@@ -1,10 +1,8 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
 
-from .nodes import model_dict, train_and_evaluate_model, selection_best_model
+from .nodes import model_dict, train_and_evaluate_model, selection_best_params
 
-
-import logging
 
 def create_pipeline(**kwargs) -> Pipeline:
     nodes = []
@@ -20,7 +18,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         
     nodes.append(
         node(
-            func=selection_best_model,
+            func=selection_best_params,
             inputs=["csv_train_energy_efficiency", "csv_target_energy_efficiency", "params:selector"],
             outputs="selection_best_model",
             name="selection_best_model_node"
