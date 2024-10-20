@@ -18,3 +18,13 @@ def calculate_correlations(df: pd.DataFrame) -> tuple:
 def calculate_boxplots(df: pd.DataFrame):
     df.plot(kind='box', subplots=True, layout=(4,4), sharex=False, sharey=False, figsize=(15,15))
     return plt
+
+
+def compare_r2_metric(lr: pd.DataFrame, rf: pd.DataFrame, xg: pd.DataFrame):
+    results = pd.concat([lr, rf, xg], axis=1)
+    plt.figure(figsize=(8,4))
+    results.boxplot()
+    plt.title("Variabilidad de los R2 Scores por Modelo")
+    plt.ylabel("R2 Score")
+    
+    return plt

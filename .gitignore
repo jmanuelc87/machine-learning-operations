@@ -167,3 +167,8 @@ cython_debug/
 
 ## SQLite
 mlops/session_store.db
+
+
+# mlflow
+mlartifacts/
+mlruns/
