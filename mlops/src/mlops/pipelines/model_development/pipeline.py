@@ -1,8 +1,7 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
 
-from functools import partial
-from .nodes import model_dict, train_and_evaluate_model
+from .nodes import model_dict, train_and_evaluate_model, selection_best_model
 
 
 import logging
@@ -10,15 +9,23 @@ import logging
 def create_pipeline(**kwargs) -> Pipeline:
     nodes = []
         
-    for m in model_dict.keys():
-        created_node = node(
-            func=lambda X, y, params, m=m: train_and_evaluate_model(X, y, m, params),
-            inputs=["csv_train_energy_efficiency", "csv_target_energy_efficiency", "params:models"],
-            outputs=f"{m}_r2_score",
-            name=f"train_and_evaluate_{m}"
+    for m in model_dict.keys():        
+        nodes.append(
+            node(
+                func=lambda X, y, params, m=m: train_and_evaluate_model(X, y, m, params),
+                inputs=["csv_train_energy_efficiency", "csv_target_energy_efficiency", "params:models"],
+                outputs=f"{m}_r2_score",
+                name=f"train_and_evaluate_{m}")
         )
         
-        nodes.append(created_node)
+    nodes.append(
+        node(
+            func=selection_best_model,
+            inputs=["csv_train_energy_efficiency", "csv_target_energy_efficiency", "params:selector"],
+            outputs="selection_best_model",
+            name="selection_best_model_node"
+        )
+    )
         
     _pipes = []
     

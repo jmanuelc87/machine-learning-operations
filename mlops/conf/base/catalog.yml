@@ -69,6 +69,33 @@ csv_target_cooling_energy_efficiency:
 
 
 
+"{namespace}.linear-regression_r2_score":
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/ENB2012_linear-regression_r2_score_{namespace}.csv
+  metadata:
+    kedro-viz:
+      layer: model_output
+
+"{namespace}.random-forest_r2_score":
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/ENB2012_random-forest_r2_score_{namespace}.csv
+  metadata:
+    kedro-viz:
+      layer: model_output
+
+"{namespace}.xgboost_r2_score":
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/ENB2012_xgboost_r2_score_{namespace}.csv
+  metadata:
+    kedro-viz:
+      layer: model_output
+
+"{namespace}.selection_best_model":
+  type: pickle.PickleDataset
+  filepath: data/07_model_output/ENB2012_{namespace}.pkl
+  backend: pickle
+
+
 
 "{namespace}.stats_energy_efficiency":
   type: pandas.ExcelDataset
@@ -104,26 +131,3 @@ csv_target_cooling_energy_efficiency:
   metadata:
     kedro-viz:
       layer: reporting
-
-
-
-"{namespace}.linear-regression_r2_score":
-  type: pandas.CSVDataset
-  filepath: data/07_model_output/ENB2012_linear-regression_r2_score_{namespace}.csv
-  metadata:
-    kedro-viz:
-      layer: model_output
-
-"{namespace}.random-forest_r2_score":
-  type: pandas.CSVDataset
-  filepath: data/07_model_output/ENB2012_random-forest_r2_score_{namespace}.csv
-  metadata:
-    kedro-viz:
-      layer: model_output
-
-"{namespace}.xgboost_r2_score":
-  type: pandas.CSVDataset
-  filepath: data/07_model_output/ENB2012_xgboost_r2_score_{namespace}.csv
-  metadata:
-    kedro-viz:
-      layer: model_output
