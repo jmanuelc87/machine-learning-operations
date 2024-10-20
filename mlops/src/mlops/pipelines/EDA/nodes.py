@@ -17,7 +17,6 @@ def load_data(filepath: str) -> pd.DataFrame:
 
 # 2) Rename columns 
 def rename_columns(dataset: pd.DataFrame) -> pd.DataFrame:
-    dataset = dataset.copy()
     dataset.rename(columns={
         "X1": "Relative_Compactness",
         "X2": "Surface_Area",

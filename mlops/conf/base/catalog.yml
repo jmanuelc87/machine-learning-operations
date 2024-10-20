@@ -40,22 +40,31 @@ heatmap:
   save_args:
     format: png
     
-    
-# 9) Declaración de outputs del nodo de datasplit 
+
+############               2) CATALOGO PARA EL PIPELINE DE DATA_TRANFORMATION                  #################
+
+# 2.1) Declaración de outputs del nodo de datasplit 
 X_train:
-  type: MemoryDataset 
+    type: MemoryDataset 
 
 X_test:
-  type: MemoryDataset 
+    type: MemoryDataset 
 
 cooling_train:
-  type: MemoryDataset 
+    type: MemoryDataset 
 
 cooling_test:
-  type: MemoryDataset
+    type: MemoryDataset
 
 heating_train:
-  type: MemoryDataset 
+    type: MemoryDataset 
 
 heating_test:                                                     
-  type: MemoryDataset 
+    type: MemoryDataset 
+  
+# 2.2) Scaled data 
+Scaled_X_train:
+    type: MemoryDataset 
+
+
+
