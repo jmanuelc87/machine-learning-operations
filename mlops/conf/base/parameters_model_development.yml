@@ -11,7 +11,7 @@ model_development:
         eval_metric: 'rmse'
     selector:
       best_model: 'xgboost'
-      metric: 'neg_mean_absolute_percentage_error'
+      metric: 'r2'
       tags:
         type: cooling
       registered_model_name: Energy_Efficiency_Cooling
@@ -34,7 +34,7 @@ model_development:
         eval_metric: 'rmse'
     selector:
       best_model: 'xgboost'
-      metric: 'neg_mean_absolute_percentage_error'
+      metric: 'r2'
       tags:
         type: heating
       registered_model_name: Energy_Efficiency_Heating
