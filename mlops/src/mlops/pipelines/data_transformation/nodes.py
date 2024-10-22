@@ -10,20 +10,31 @@ def remove_null_values(df: pd.DataFrame) -> pd.DataFrame:
     return df.dropna()
 
 
-def rename_columns(df: pd.DataFrame, params) -> pd.DataFrame:
-    renamed = df[params.keys()].rename(params, axis=1, inplace=False)
+def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
+    renamed = df.rename({
+        "X1": "Relative Compactness",
+        "X2": "Surface Area",
+        "X3": "Wall Area",
+        "X4": "Roof Area",
+        "X5": "Overall Height",
+        "X6": "Orientation",
+        "X7": "Glazing Area",
+        "X8": "Glazing Area Distribution",
+        "Y1": "Heating Load",
+        "Y2": "Cooling Load"
+    }, axis=1, inplace=False)
     return renamed
 
-def feature_standard_scaling(df: pd.DataFrame, params) -> pd.DataFrame:
-    features = df[params['scaling']]
+def feature_standard_scaling(df: pd.DataFrame) -> pd.DataFrame:
+    features = df[["Relative Compactness", "Surface Area", "Wall Area", "Roof Area"]]
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(X=features)
     return pd.DataFrame(data=scaled_data, columns=features.columns), scaler
 
 
-def feature_encoding(df: pd.DataFrame, params) -> pd.DataFrame:
-    features = df[params['encoding']]
-    encoder = BinaryEncoder(cols=params['encoding'])
+def feature_encoding(df: pd.DataFrame) -> pd.DataFrame:
+    features = df[["Overall Height", "Orientation", "Glazing Area", "Glazing Area Distribution"]]
+    encoder = BinaryEncoder(cols=["Overall Height", "Orientation", "Glazing Area", "Glazing Area Distribution"])
     categorical_data = encoder.fit_transform(features)
     return categorical_data, encoder
 
@@ -36,9 +47,9 @@ def feature_merge(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
 
 
 def separate_targets(df: pd.DataFrame) -> pd.DataFrame:
-    features = df.drop(columns=["Heating load", "Cooling load"])
-    cooling_target = df[["Cooling load"]]
-    heating_target = df[["Heating load"]]
+    features = df.drop(columns=["Heating Load", "Cooling Load"])
+    cooling_target = df[["Cooling Load"]]
+    heating_target = df[["Heating Load"]]
     return features, heating_target, cooling_target
 
 

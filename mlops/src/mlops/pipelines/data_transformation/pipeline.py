@@ -8,7 +8,7 @@ def create_pipeline(**kwargs) -> Pipeline:
     base_nodes_list = [
         node(
             func=rename_columns,
-            inputs=["energy_efficiency", "params:rename_columns"],
+            inputs=["energy_efficiency"],
             outputs="renamed_energy_efficiency",
             name="rename_columns_node"
         ),
@@ -34,13 +34,13 @@ def create_pipeline(**kwargs) -> Pipeline:
     processing_nodes_list = [
         node(
             func=feature_standard_scaling,
-            inputs=["features_energy_efficiency", "params:features"],
+            inputs=["features_energy_efficiency"],
             outputs=["scaled_energy_efficiency", "scaler_artifact"],
             name="feature_standard_scaling_node"
         ),
         node(
             func=feature_encoding,
-            inputs=["features_energy_efficiency", "params:features"],
+            inputs=["features_energy_efficiency"],
             outputs=["encoded_energy_efficiency", "encoding_artifact"],
             name="feature_encoding_node"
         ),
