@@ -8,14 +8,14 @@ def create_pipeline(**kwargs) -> Pipeline:
     node_list = [
         node(
             func=estimate_r2_xgb_model,
-            inputs=["train_energy_efficiency", "target_energy_efficiency", "params:selector"],
-            outputs=["selection_best_xg_r2_model", "selection_best_xg_r2_metric", "selection_best_xg_r2_params"],
+            inputs=["train_energy_efficiency", "target_energy_efficiency", "params:grid", "params:namespace"],
+            outputs=["selection_best_xg_r2_model", "selection_best_xg_r2_metric"],
             name="estimate_xgboost_r2_model"
         ),
         node(
             func=estimate_mse_xgb_model,
-            inputs=["train_energy_efficiency", "target_energy_efficiency", "params:selector"],
-            outputs=["selection_best_xg_mse_model", "selection_best_xg_mse_metric", "selection_best_xg_mse_params"],
+            inputs=["train_energy_efficiency", "target_energy_efficiency", "params:grid", "params:namespace"],
+            outputs=["selection_best_xg_mse_model", "selection_best_xg_mse_metric"],
             name="estimate_xgboost_mse_model"
         )
     ]
@@ -26,6 +26,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                 "train_energy_efficiency": f"heating.energy_efficiency_train",
                 "target_energy_efficiency": f"heating.target_energy_efficiency_train"
             },
+            parameters={"params:namespace": "heating_train.name"},
             namespace="heating_train"
         )
     
@@ -36,6 +37,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                 "train_energy_efficiency": f"cooling.energy_efficiency_train",
                 "target_energy_efficiency": f"cooling.target_energy_efficiency_train"
             },
+            parameters={"params:namespace": "cooling_train.name"},
             namespace="cooling_train"
         )
     
