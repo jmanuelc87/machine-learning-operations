@@ -148,46 +148,8 @@ target_cooling_energy_efficiency:
 
 
 "{namespace}.selection_best_model":
-  type: pickle.PickleDataset
-  filepath: data/07_model_output/ENB2012_{namespace}.pkl
-  backend: pickle
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.xgboost
   metadata:
     kedro-viz:
       layer: models
-
-
-
-"{namespace}.stats_energy_efficiency":
-  type: pandas.ExcelDataset
-  filepath: data/08_reporting/ENB2012_stats.xlsx
-  metadata:
-    kedro-viz:
-      layer: reporting
-
-"{namespace}.boxplot_energy_efficiency":
-  type: matplotlib.MatplotlibWriter
-  filepath: data/08_reporting/ENB2012_boxplot.png
-  metadata:
-    kedro-viz:
-      layer: reporting
-
-"{namespace}.boxplot_models_cooling_energy_efficiency":
-  type: matplotlib.MatplotlibWriter
-  filepath: data/08_reporting/ENB2012_boxplot_models_cooling.png
-  metadata:
-    kedro-viz:
-      layer: reporting
-
-"{namespace}.boxplot_models_heating_energy_efficiency":
-  type: matplotlib.MatplotlibWriter
-  filepath: data/08_reporting/ENB2012_boxplot_models_heating.png
-  metadata:
-    kedro-viz:
-      layer: reporting
-
-"{namespace}.correlations_plot_energy_efficiency":
-  type: matplotlib.MatplotlibWriter
-  filepath: data/08_reporting/ENB2012_correlations_plot.png
-  metadata:
-    kedro-viz:
-      layer: reporting
