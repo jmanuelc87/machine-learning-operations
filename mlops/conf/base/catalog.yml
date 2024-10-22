@@ -7,93 +7,153 @@ raw_energy_efficiency:
 
 
 
-"{namespace}.csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_data.csv
+"energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/ENB2012_data.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
       layer: intermediate
 
-"{namespace}.csv_renamed_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_cols_renamed.csv
-  metadata:
-    kedro-viz:
-      layer: intermediate
-
-
-
-csv_features_energy_efficiency:
-  type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_features.csv
-  metadata:
-    kedro-viz:
-      layer: intermediate
-
-csv_target_heating_energy_efficiency:
-  type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_target_heating.csv
-  metadata:
-    kedro-viz:
-      layer: intermediate
-
-csv_target_cooling_energy_efficiency:
-  type: pandas.CSVDataset
-  filepath: data/02_intermediate/ENB2012_target_cooling.csv
+"renamed_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/ENB2012_cols_renamed.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
       layer: intermediate
 
 
 
-"{namespace}.scaled_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/03_primary/ENB2012_scaled.csv
+features_energy_efficiency:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/ENB2012_features.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
       layer: primary
 
-"{namespace}.encoded_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/03_primary/ENB2012_encoded.csv
+target_heating_energy_efficiency:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/ENB2012_target_heating.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
       layer: primary
 
-"{namespace}.merged_csv_energy_efficiency":
-  type: pandas.CSVDataset
-  filepath: data/03_primary/ENB2012_merged.csv
+target_cooling_energy_efficiency:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/ENB2012_target_cooling.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
       layer: primary
 
 
 
-"{namespace}.linear-regression_r2_score":
-  type: pandas.CSVDataset
-  filepath: data/07_model_output/ENB2012_linear-regression_r2_score_{namespace}.csv
+"scaled_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/ENB2012_scaled.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
-      layer: model_output
+      layer: feature
 
-"{namespace}.random-forest_r2_score":
-  type: pandas.CSVDataset
-  filepath: data/07_model_output/ENB2012_random-forest_r2_score_{namespace}.csv
+"encoded_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/ENB2012_encoded.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
-      layer: model_output
+      layer: feature
 
-"{namespace}.xgboost_r2_score":
-  type: pandas.CSVDataset
-  filepath: data/07_model_output/ENB2012_xgboost_r2_score_{namespace}.csv
+"merged_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/ENB2012_merged.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
   metadata:
     kedro-viz:
-      layer: model_output
+      layer: feature
+
+
+
+"{namespace}.energy_efficiency_train":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_train.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+"{namespace}.energy_efficiency_test":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_test.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+"{namespace}.target_energy_efficiency_train":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_train_target.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+"{namespace}.target_energy_efficiency_test":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_test_target.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+
 
 "{namespace}.selection_best_model":
   type: pickle.PickleDataset
   filepath: data/07_model_output/ENB2012_{namespace}.pkl
   backend: pickle
+  metadata:
+    kedro-viz:
+      layer: models
 
 
 

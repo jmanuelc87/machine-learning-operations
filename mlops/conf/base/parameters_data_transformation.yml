@@ -17,15 +17,14 @@ cooling:
   features:
     test_size:  0.15
     random_state:  42
-processing:
-  features:
-    scaling:
-      - Compactness
-      - Surface Area
-      - Wall Area
-      - Roof Area
-    encoding:
-      - Height
-      - Orientation
-      - Glazing Area
-      - Glazing Area dist
+features:
+  scaling:
+    - Compactness
+    - Surface Area
+    - Wall Area
+    - Roof Area
+  encoding:
+    - Height
+    - Orientation
+    - Glazing Area
+    - Glazing Area dist
