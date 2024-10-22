@@ -25,7 +25,7 @@ def _log_mlflow(metric_name, score, model_name, model_params, estimator, input):
 
 def train_and_evaluate_model(X: pd.DataFrame, y:pd.DataFrame, model, params) -> pd.DataFrame:
     SelectedModel = model_dict[model]
-    selected_model = SelectedModel(**params[model])    
+    selected_model = SelectedModel(**params[model])
     scores = cross_val_score(
             estimator=selected_model,
             X=X,

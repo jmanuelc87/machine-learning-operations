@@ -1,0 +1,31 @@
+rename_columns: 
+  X1: Compactness
+  X2: Surface Area
+  X3: Wall Area
+  X4: Roof Area
+  X5: Height
+  X6: Orientation
+  X7: Glazing Area
+  X8: Glazing Area dist
+  Y1: Heating load
+  Y2: Cooling load
+heating:
+  features:
+    test_size:  0.15
+    random_state:  42
+cooling:
+  features:
+    test_size:  0.15
+    random_state:  42
+processing:
+  features:
+    scaling:
+      - Compactness
+      - Surface Area
+      - Wall Area
+      - Roof Area
+    encoding:
+      - Height
+      - Orientation
+      - Glazing Area
+      - Glazing Area dist

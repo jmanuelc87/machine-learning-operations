@@ -45,8 +45,10 @@ def create_pipeline(**kwargs) -> Pipeline:
     in1 = {f"{p}.csv_target_energy_efficiency_train": f"data_science.{p}.csv_target_energy_efficiency_train" for p in hc}
     in1.update(in2)
 
-    return pipeline_modular(
-        pipe=_pipes,
-        inputs=in1,
-        namespace="model_development"
-    )
+    # return pipeline_modular(
+    #     pipe=_pipes,
+    #     inputs=in1,
+    #     namespace="model_development"
+    # )
+    
+    return pipeline([])

@@ -1,9 +1,18 @@
+import numpy as np
 import pandas as pd
 
 from category_encoders import BinaryEncoder
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split
 
+
+def remove_null_values(df: pd.DataFrame) -> pd.DataFrame:
+    return df.dropna()
+
+
+def rename_columns(df: pd.DataFrame, params) -> pd.DataFrame:
+    renamed = df[params.keys()].rename(params, axis=1, inplace=False)
+    return renamed
 
 def feature_standard_scaling(df: pd.DataFrame, params) -> pd.DataFrame:
     features = df[params['scaling']]
@@ -27,9 +36,9 @@ def feature_merge(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
 
 
 def separate_targets(df: pd.DataFrame) -> pd.DataFrame:
-    features = df.drop(columns=["Y1", "Y2"])
-    cooling_target = df[["Y2"]]
-    heating_target = df[["Y1"]]
+    features = df.drop(columns=["Heating load", "Cooling load"])
+    cooling_target = df[["Cooling load"]]
+    heating_target = df[["Heating load"]]
     return features, heating_target, cooling_target
     
 
