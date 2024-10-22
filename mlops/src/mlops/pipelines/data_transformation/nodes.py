@@ -18,14 +18,14 @@ def feature_standard_scaling(df: pd.DataFrame, params) -> pd.DataFrame:
     features = df[params['scaling']]
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(X=features)
-    return pd.DataFrame(data=scaled_data, columns=features.columns)
+    return pd.DataFrame(data=scaled_data, columns=features.columns), scaler
 
 
 def feature_encoding(df: pd.DataFrame, params) -> pd.DataFrame:
     features = df[params['encoding']]
     encoder = BinaryEncoder(cols=params['encoding'])
     categorical_data = encoder.fit_transform(features)
-    return categorical_data
+    return categorical_data, encoder
 
 
 def feature_merge(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -40,7 +40,7 @@ def separate_targets(df: pd.DataFrame) -> pd.DataFrame:
     cooling_target = df[["Cooling load"]]
     heating_target = df[["Heating load"]]
     return features, heating_target, cooling_target
-    
+
 
 def features_train_test_split(df1: pd.DataFrame, target: pd.DataFrame, params):
     X_train, X_test, y_train, y_test = train_test_split(df1, target,  test_size=params['test_size'], random_state=params['random_state'], shuffle=True)

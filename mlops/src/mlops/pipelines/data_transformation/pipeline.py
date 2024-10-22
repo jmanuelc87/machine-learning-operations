@@ -35,13 +35,13 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(
             func=feature_standard_scaling,
             inputs=["features_energy_efficiency", "params:features"],
-            outputs="scaled_energy_efficiency",
+            outputs=["scaled_energy_efficiency", "scaler_artifact"],
             name="feature_standard_scaling_node"
         ),
         node(
             func=feature_encoding,
             inputs=["features_energy_efficiency", "params:features"],
-            outputs="encoded_energy_efficiency",
+            outputs=["encoded_energy_efficiency", "encoding_artifact"],
             name="feature_encoding_node"
         ),
         node(
