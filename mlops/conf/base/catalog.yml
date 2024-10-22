@@ -19,15 +19,17 @@ raw_energy_efficiency:
       layer: intermediate
 
 "renamed_energy_efficiency":
-  type: pandas.ParquetDataset
-  filepath: data/02_intermediate/ENB2012_cols_renamed.parquet
-  load_args:
-    engine: pyarrow
-  save_args:
-    engine: pyarrow
-  metadata:
-    kedro-viz:
-      layer: intermediate
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.ParquetDataset
+    filepath: data/02_intermediate/ENB2012_cols_renamed.parquet
+    load_args:
+      engine: pyarrow
+    save_args:
+      engine: pyarrow
+    metadata:
+      kedro-viz:
+        layer: intermediate
 
 
 
