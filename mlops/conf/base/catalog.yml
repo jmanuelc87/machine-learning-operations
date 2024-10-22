@@ -147,9 +147,76 @@ target_cooling_energy_efficiency:
 
 
 
-"{namespace}.selection_best_model":
+"{namespace}.selection_best_xg_r2_model":
   type: kedro_mlflow.io.models.MlflowModelTrackingDataset
   flavor: mlflow.xgboost
+  artifact_path: "{namespace}/r2/model"
+
+"{namespace}.selection_best_xg_r2_metric":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}_r2"
+
+"{namespace}.selection_best_xg_r2_params":
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.CSVDataset
+    filepath: data/07_model_output/{namespace}_xgb_params.csv
+  artifact_path: "{namespace}/r2/params"
+
+
+
+"{namespace}.selection_best_xg_mse_model":
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.xgboost
+  artifact_path: "{namespace}/mse/model"
+
+"{namespace}.selection_best_xg_mse_metric":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}_mse"
+
+"{namespace}.selection_best_xg_mse_params":
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.CSVDataset
+    filepath: data/07_model_output/{namespace}_xgb_params.csv
+  artifact_path: "{namespace}/mse/params"
+
+
+
+# Excel exportado en la funcion de descriptive_statistics
+EDA.descriptive_statistics_excel:
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/EDA/estadistica_descriptiva.xlsx
   metadata:
     kedro-viz:
-      layer: models
+      layer: reporting
+
+# Histogramas exportados
+EDA.histograms:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/EDA/histograms.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+  save_args:
+    format: png
+
+# Boxplots
+EDA.boxplots:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/EDA/boxplots.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+  save_args:
+    format: png
+
+# Heatmap
+EDA.heatmap:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/EDA/heatmap.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+  save_args:
+    format: png

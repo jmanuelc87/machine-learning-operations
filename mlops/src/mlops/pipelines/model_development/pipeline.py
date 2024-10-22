@@ -1,54 +1,43 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
 
-from .nodes import model_dict, train_and_evaluate_model, selection_best_params
+from .nodes import estimate_r2_xgb_model, estimate_mse_xgb_model
 
 
 def create_pipeline(**kwargs) -> Pipeline:
-    nodes = []
-
-    for m in model_dict.keys():        
-        nodes.append(
-            node(
-                func=lambda X, y, params, m=m: train_and_evaluate_model(X, y, m, params),
-                inputs=["csv_train_energy_efficiency", "csv_target_energy_efficiency", "params:models"],
-                outputs=f"{m}_r2_score",
-                name=f"train_and_evaluate_{m}")
-        )
-
-    nodes.append(
+    node_list = [
         node(
-            func=selection_best_params,
-            inputs=["csv_train_energy_efficiency", "csv_target_energy_efficiency", "params:selector"],
-            outputs="selection_best_model",
-            name="selection_best_params_node"
+            func=estimate_r2_xgb_model,
+            inputs=["train_energy_efficiency", "target_energy_efficiency", "params:selector"],
+            outputs=["selection_best_xg_r2_model", "selection_best_xg_r2_metric", "selection_best_xg_r2_params"],
+            name="estimate_xgboost_r2_model"
+        ),
+        node(
+            func=estimate_mse_xgb_model,
+            inputs=["train_energy_efficiency", "target_energy_efficiency", "params:selector"],
+            outputs=["selection_best_xg_mse_model", "selection_best_xg_mse_metric", "selection_best_xg_mse_params"],
+            name="estimate_xgboost_mse_model"
         )
-    )
-
-    _pipes = []
-
-    hc = ['heating', 'cooling']
-
-    for p in hc:
-        __pipe = pipeline_modular(
-            pipe=nodes,
-            inputs={
-                "csv_train_energy_efficiency": f"{p}.csv_energy_efficiency_train",
-                "csv_target_energy_efficiency": f"{p}.csv_target_energy_efficiency_train"
-            },
-            namespace=p
-        )
-
-        _pipes.append(__pipe)
-
-    in2 = {f"{p}.csv_energy_efficiency_train": f"data_science.{p}.csv_energy_efficiency_train" for p in hc }
-    in1 = {f"{p}.csv_target_energy_efficiency_train": f"data_science.{p}.csv_target_energy_efficiency_train" for p in hc}
-    in1.update(in2)
-
-    # return pipeline_modular(
-    #     pipe=_pipes,
-    #     inputs=in1,
-    #     namespace="model_development"
-    # )
+    ]
     
-    return pipeline([])
+    heating_train_pipe = pipeline_modular(
+            pipe=node_list,
+            inputs={
+                "train_energy_efficiency": f"heating.energy_efficiency_train",
+                "target_energy_efficiency": f"heating.target_energy_efficiency_train"
+            },
+            namespace="heating_train"
+        )
+    
+    
+    cooling_train_pipe = pipeline_modular(
+            pipe=node_list,
+            inputs={
+                "train_energy_efficiency": f"cooling.energy_efficiency_train",
+                "target_energy_efficiency": f"cooling.target_energy_efficiency_train"
+            },
+            namespace="cooling_train"
+        )
+    
+    
+    return heating_train_pipe + cooling_train_pipe

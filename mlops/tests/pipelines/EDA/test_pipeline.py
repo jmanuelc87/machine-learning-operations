@@ -1,6 +1,6 @@
 """
-This is a boilerplate test file for pipeline 'ML'
-generated using Kedro 0.19.8.
+This is a boilerplate test file for pipeline 'EDA'
+generated using Kedro 0.19.9.
 Please add your pipeline tests here.
 
 Kedro recommends using `pytest` framework, more info about it can be found

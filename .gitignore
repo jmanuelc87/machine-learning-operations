@@ -169,6 +169,16 @@ cython_debug/
 mlops/session_store.db
 
 
+# Adding the mlruns folder
+mlops/notebooks/mlruns/
+
+
+# Adding this file
+.DS_Store
+DS_Store
+
+
+
 # mlflow
 mlartifacts/
 mlruns/

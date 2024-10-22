@@ -3,24 +3,16 @@ import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import GridSearchCV, cross_val_score
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 
 
-model_dict = {
-    "linear-regression": LinearRegression,
-    "random-forest": RandomForestRegressor,
-    "xgboost": XGBRegressor
-}
-
-def estimate_model(X: pd.DataFrame, y: pd.DataFrame, params, Model):
+def estimate_model(X: pd.DataFrame, y: pd.DataFrame, params, metric, Model):
     _model = Model()
     
     grid_search = GridSearchCV(
         estimator=_model,
-        param_grid=params['best_model_params'],
-        scoring=params['metric'],
+        param_grid=params['grid'],
+        scoring=metric,
         cv=4,
         n_jobs=-1,
         verbose=0
@@ -28,9 +20,14 @@ def estimate_model(X: pd.DataFrame, y: pd.DataFrame, params, Model):
     
     grid_search.fit(X, y)
     
-    return _model
+    return grid_search.best_estimator_, grid_search.best_score_, pd.DataFrame(data=[grid_search.best_params_])
 
 
-def estimate_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params):
+def estimate_r2_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params):
     SelectedModel = XGBRegressor
-    return estimate_model(X, y, params, SelectedModel)
+    return estimate_model(X, y, params, 'r2', SelectedModel)
+
+
+def estimate_mse_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params):
+    SelectedModel = XGBRegressor
+    return estimate_model(X, y, params, 'neg_mean_squared_error', SelectedModel)

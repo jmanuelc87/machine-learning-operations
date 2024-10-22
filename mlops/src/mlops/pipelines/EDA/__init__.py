@@ -1,6 +1,6 @@
 """
-This is a boilerplate pipeline 'ML'
-generated using Kedro 0.19.8
+This is a boilerplate pipeline 'EDA'
+generated using Kedro 0.19.9
 """
 
 from .pipeline import create_pipeline
