@@ -34,14 +34,14 @@ def create_pipeline(**kwargs) -> Pipeline:
     processing_nodes_list = [
         node(
             func=feature_standard_scaling,
-            inputs=["features_energy_efficiency"],
+            inputs=["energy_efficiency_train"],
             outputs=["scaled_energy_efficiency", "scaler_artifact"],
             name="feature_standard_scaling_node"
         ),
         node(
             func=feature_encoding,
-            inputs=["features_energy_efficiency"],
-            outputs=["encoded_energy_efficiency", "encoding_artifact"],
+            inputs=["energy_efficiency_train"],
+            outputs=["encoded_energy_efficiency", "encoder_artifact"],
             name="feature_encoding_node"
         ),
         node(
@@ -52,8 +52,6 @@ def create_pipeline(**kwargs) -> Pipeline:
         )
     ]
     
-    processing_pipe = pipeline(processing_nodes_list)
-    
     features_train_test_split_node = node(
         func=features_train_test_split,
         inputs=["energy_efficiency", "target_energy_efficiency", "params:features"],
@@ -61,21 +59,21 @@ def create_pipeline(**kwargs) -> Pipeline:
     )
     
     heating_split_pipe = pipeline_modular(
-        pipe=[features_train_test_split_node],
+        pipe=[features_train_test_split_node] + processing_nodes_list,
         inputs={
-            "energy_efficiency":"merged_energy_efficiency",
+            "energy_efficiency": "features_energy_efficiency",
             "target_energy_efficiency": "target_heating_energy_efficiency"
         },
         namespace="heating"
     )
     
     cooling_split_pipe = pipeline_modular(
-        pipe=[features_train_test_split_node],
+        pipe=[features_train_test_split_node] + processing_nodes_list,
         inputs={
-            "energy_efficiency":"merged_energy_efficiency",
+            "energy_efficiency":"features_energy_efficiency",
             "target_energy_efficiency": "target_cooling_energy_efficiency"
         },
         namespace="cooling"
     )
     
-    return base_pipe + separate_targets_pipe + processing_pipe + heating_split_pipe + cooling_split_pipe
+    return base_pipe + separate_targets_pipe + heating_split_pipe + cooling_split_pipe

@@ -2,7 +2,8 @@ import mlflow
 import numpy as np
 import pandas as pd
 
-from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import r2_score, root_mean_squared_error
+from sklearn.model_selection import GridSearchCV
 from xgboost import XGBRegressor
 
 
@@ -24,7 +25,7 @@ def estimate_model(X: pd.DataFrame, y: pd.DataFrame, params, metric, namespace, 
         mlflow.log_param(f"{namespace}.best_param.{key}", grid_search.best_params_[key])
     
     return grid_search.best_estimator_, grid_search.best_score_
-
+    
 
 def estimate_r2_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
     SelectedModel = XGBRegressor
@@ -33,4 +34,27 @@ def estimate_r2_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
 
 def estimate_mse_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
     SelectedModel = XGBRegressor
-    return estimate_model(X, y, params, 'neg_mean_squared_error', namespace, SelectedModel)
+    return estimate_model(X, y, params, 'neg_root_mean_squared_error', namespace, SelectedModel)
+
+
+def test_xgb_model(X: pd.DataFrame, y: pd.DataFrame, _model, encoder, scaler):
+    X_numeric = X[["Relative Compactness", "Surface Area", "Wall Area", "Roof Area"]]
+    X_categoric = X[["Overall Height", "Orientation", "Glazing Area", "Glazing Area Distribution"]]
+    
+    categorical = encoder.transform(X_categoric)
+    numeric = scaler.transform(X_numeric)
+    
+    categorical_df = pd.DataFrame(categorical, columns=encoder.get_feature_names_out())
+    numeric_df = pd.DataFrame(numeric, columns=scaler.get_feature_names_out())
+    
+    categorical_df.reset_index(drop=True, inplace=True)
+    numeric_df.reset_index(drop=True, inplace=True)
+    
+    X_test = pd.concat(objs=[numeric_df, categorical_df], axis=1)
+        
+    y_pred = _model.predict(X_test)
+    
+    rmse = root_mean_squared_error(y, y_pred)
+    r2 = r2_score(y, y_pred)
+    
+    return rmse, r2

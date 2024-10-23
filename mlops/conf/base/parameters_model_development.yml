@@ -1,4 +1,4 @@
-cooling_train:
+cooling_model:
   name: cooling
   grid:
     n_estimators: [50, 75, 100, 150, 200]
@@ -7,7 +7,7 @@ cooling_train:
     subsample: [0.8, 1.0]
     colsample_bytree: [0.8, 1.0]
 
-heating_train:
+heating_model:
   name: heating
   grid:
     n_estimators: [50, 75, 100, 150, 200]

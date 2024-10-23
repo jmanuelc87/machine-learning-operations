@@ -68,7 +68,7 @@ target_cooling_energy_efficiency:
 
 
 
-"scaled_energy_efficiency":
+"{namespace}.scaled_energy_efficiency":
   type: pandas.ParquetDataset
   filepath: data/04_feature/ENB2012_scaled.parquet
   load_args:
@@ -79,7 +79,7 @@ target_cooling_energy_efficiency:
     kedro-viz:
       layer: feature
 
-"encoded_energy_efficiency":
+"{namespace}.encoded_energy_efficiency":
   type: pandas.ParquetDataset
   filepath: data/04_feature/ENB2012_encoded.parquet
   load_args:
@@ -90,7 +90,7 @@ target_cooling_energy_efficiency:
     kedro-viz:
       layer: feature
 
-"merged_energy_efficiency":
+"{namespace}.merged_energy_efficiency":
   type: pandas.ParquetDataset
   filepath: data/04_feature/ENB2012_merged.parquet
   load_args:
@@ -148,12 +148,12 @@ target_cooling_energy_efficiency:
       layer: model_input
 
 
-"scaler_artifact":
+"{namespace}.scaler_artifact":
   type: kedro_mlflow.io.models.MlflowModelTrackingDataset
   flavor: mlflow.sklearn
   artifact_path: 'scaler'
 
-"encoding_artifact":
+"{namespace}.encoder_artifact":
   type: kedro_mlflow.io.models.MlflowModelTrackingDataset
   flavor: mlflow.sklearn
   artifact_path: 'encoder'
@@ -177,22 +177,31 @@ target_cooling_energy_efficiency:
 
 
 
-"{namespace}.selection_best_xg_mse_model":
+"{namespace}.selection_best_xg_rmse_model":
   type: kedro_mlflow.io.models.MlflowModelTrackingDataset
   flavor: mlflow.xgboost
-  artifact_path: "{namespace}/mse/model"
+  artifact_path: "{namespace}/rmse/model"
 
-"{namespace}.selection_best_xg_mse_metric":
+"{namespace}.selection_best_xg_rmse_metric":
   type: kedro_mlflow.io.metrics.MlflowMetricDataset
-  key: "{namespace}_mse"
+  key: "{namespace}_rmse"
 
-"{namespace}.selection_best_xg_mse_params":
+"{namespace}.selection_best_xg_rmse_params":
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:
     type: pandas.CSVDataset
     filepath: data/07_model_output/{namespace}_xgb_params.csv
-  artifact_path: "{namespace}/mse/params"
+  artifact_path: "{namespace}/rmse/params"
 
+
+
+"{namespace}.test_rmse":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}.test_rmse"
+
+"{namespace}.test_r2":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}.test_r2"
 
 
 # Excel exportado en la funcion de descriptive_statistics
