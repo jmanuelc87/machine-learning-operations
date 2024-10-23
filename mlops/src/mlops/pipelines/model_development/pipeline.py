@@ -16,7 +16,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(
             func=estimate_mse_xgb_model,
             inputs=["train_energy_efficiency", "target_energy_efficiency", "params:grid", "params:namespace"],
-            outputs=["selection_best_xg_mse_model", "selection_best_xg_mse_metric"],
+            outputs=["selection_best_xg_rmse_model", "selection_best_xg_rmse_metric"],
             name="estimate_xgboost_mse_model_node"
         ),
         
