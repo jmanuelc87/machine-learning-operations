@@ -1,0 +1,8 @@
+heating:
+  features:
+    test_size:  0.15
+    random_state:  42
+cooling:
+  features:
+    test_size:  0.15
+    random_state:  42
