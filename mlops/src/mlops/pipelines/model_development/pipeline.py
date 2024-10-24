@@ -1,28 +1,28 @@
 from kedro.pipeline import Pipeline, pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline as pipeline_modular
 
-from .nodes import estimate_r2_xgb_model, estimate_mse_xgb_model, test_xgb_model
+from .nodes import estimate_r2_model, estimate_mape_model, test_xgb_model
 
 
 def create_pipeline(**kwargs) -> Pipeline:
     node_list = [
         node(
-            func=estimate_r2_xgb_model,
+            func=estimate_r2_model,
             inputs=["train_energy_efficiency", "target_energy_efficiency", "params:grid", "params:namespace"],
-            outputs=["selection_best_xg_r2_model", "selection_best_xg_r2_metric"],
-            name="estimate_xgboost_r2_model_node"
+            outputs=["selection_best_r2_model", "selection_best_r2_metric"],
+            name="estimate_r2_model_node"
         ),
         
         node(
-            func=estimate_mse_xgb_model,
+            func=estimate_mape_model,
             inputs=["train_energy_efficiency", "target_energy_efficiency", "params:grid", "params:namespace"],
-            outputs=["selection_best_xg_rmse_model", "selection_best_xg_rmse_metric"],
-            name="estimate_xgboost_mse_model_node"
+            outputs=["selection_best_mape_model", "selection_best_mape_metric"],
+            name="estimate_mape_model_node"
         ),
         
         node(
             func=test_xgb_model,
-            inputs=["test_energy_efficiency", "test_target_energy_efficiency", "selection_best_xg_r2_model", "encoding_artifact", "scaler_artifact"],
+            inputs=["test_energy_efficiency", "test_target_energy_efficiency", "selection_best_r2_model", "encoding_artifact", "scaler_artifact"],
             outputs=["test_rmse", "test_r2"],
             name="test_xgb_model_node"
         )

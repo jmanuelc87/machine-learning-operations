@@ -159,16 +159,16 @@ target_cooling_energy_efficiency:
   artifact_path: 'encoder'
 
 
-"{namespace}.selection_best_xg_r2_model":
+"{namespace}.selection_best_r2_model":
   type: kedro_mlflow.io.models.MlflowModelTrackingDataset
   flavor: mlflow.xgboost
   artifact_path: "{namespace}/r2/model"
 
-"{namespace}.selection_best_xg_r2_metric":
+"{namespace}.selection_best_r2_metric":
   type: kedro_mlflow.io.metrics.MlflowMetricDataset
-  key: "{namespace}_r2"
+  key: "{namespace}.r2"
 
-"{namespace}.selection_best_xg_r2_params":
+"{namespace}.selection_best_r2_params":
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:
     type: pandas.CSVDataset
@@ -177,27 +177,27 @@ target_cooling_energy_efficiency:
 
 
 
-"{namespace}.selection_best_xg_rmse_model":
+"{namespace}.selection_best_mape_model":
   type: kedro_mlflow.io.models.MlflowModelTrackingDataset
   flavor: mlflow.xgboost
-  artifact_path: "{namespace}/rmse/model"
+  artifact_path: "{namespace}/mape/model"
 
-"{namespace}.selection_best_xg_rmse_metric":
+"{namespace}.selection_best_mape_metric":
   type: kedro_mlflow.io.metrics.MlflowMetricDataset
-  key: "{namespace}_rmse"
+  key: "{namespace}.mape"
 
-"{namespace}.selection_best_xg_rmse_params":
+"{namespace}.selection_best_mape_params":
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:
     type: pandas.CSVDataset
     filepath: data/07_model_output/{namespace}_xgb_params.csv
-  artifact_path: "{namespace}/rmse/params"
+  artifact_path: "{namespace}/mape/params"
 
 
 
-"{namespace}.test_rmse":
+"{namespace}.test_mape":
   type: kedro_mlflow.io.metrics.MlflowMetricDataset
-  key: "{namespace}.test_rmse"
+  key: "{namespace}.test_mape"
 
 "{namespace}.test_r2":
   type: kedro_mlflow.io.metrics.MlflowMetricDataset

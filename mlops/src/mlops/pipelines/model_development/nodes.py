@@ -2,7 +2,7 @@ import mlflow
 import numpy as np
 import pandas as pd
 
-from sklearn.metrics import r2_score, root_mean_squared_error
+from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_percentage_error
 from sklearn.model_selection import GridSearchCV
 from xgboost import XGBRegressor
 
@@ -22,19 +22,19 @@ def estimate_model(X: pd.DataFrame, y: pd.DataFrame, params, metric, namespace, 
     grid_search.fit(X, y)
         
     for key in grid_search.best_params_.keys():
-        mlflow.log_param(f"{namespace}.best_param.{key}", grid_search.best_params_[key])
+        mlflow.log_param(f"{namespace}.{metric}.best_param.{key}", grid_search.best_params_[key])
     
     return grid_search.best_estimator_, grid_search.best_score_
     
 
-def estimate_r2_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
+def estimate_r2_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
     SelectedModel = XGBRegressor
     return estimate_model(X, y, params, 'r2', namespace, SelectedModel)
 
 
-def estimate_mse_xgb_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
+def estimate_mape_model(X: pd.DataFrame, y: pd.DataFrame, params, namespace):
     SelectedModel = XGBRegressor
-    return estimate_model(X, y, params, 'neg_root_mean_squared_error', namespace, SelectedModel)
+    return estimate_model(X, y, params, 'neg_mean_absolute_percentage_error', namespace, SelectedModel)
 
 
 def test_xgb_model(X: pd.DataFrame, y: pd.DataFrame, _model, encoder, scaler):
@@ -54,7 +54,7 @@ def test_xgb_model(X: pd.DataFrame, y: pd.DataFrame, _model, encoder, scaler):
         
     y_pred = _model.predict(X_test)
     
-    rmse = root_mean_squared_error(y, y_pred)
+    rmse = mean_absolute_percentage_error(y, y_pred)
     r2 = r2_score(y, y_pred)
     
     return rmse, r2
