@@ -1,20 +1,20 @@
-# What is this for?
+# ¿Para qué es esto?
 
-This folder should be used to store configuration files used by Kedro or by separate tools.
+Esta carpeta debe usarse para almacenar archivos de configuración utilizados por Kedro o por herramientas adicionales.
 
-This file can be used to provide users with instructions for how to reproduce local configuration with their own credentials. You can edit the file however you like, but you may wish to retain the information below and add your own section in the section titled **Instructions**.
+Este archivo puede usarse para proporcionar a los usuarios instrucciones sobre cómo reproducir la configuración local con sus propias credenciales. Puedes editar el archivo como prefieras, pero tal vez desees conservar la información a continuación y agregar tu propia sección en el apartado titulado **Instrucciones**.
 
-## Local configuration
+## Configuración local
 
-The `local` folder should be used for configuration that is either user-specific (e.g. IDE configuration) or protected (e.g. security keys).
+La carpeta `local` debe usarse para configuración que sea específica para cada usuario (por ejemplo, configuración del IDE) o protegida (como claves de seguridad).
 
-> *Note:* Please do not check in any local configuration to version control.
+> *Nota:* No subas ninguna configuración local al control de versiones.
 
-## Base configuration
+## Configuración base
 
-The `base` folder is for shared configuration, such as non-sensitive and project-related configuration that may be shared across team members.
+La carpeta `base` es para configuración compartida, como configuraciones no sensibles y relacionadas con el proyecto que pueden ser compartidas entre los miembros del equipo.
 
-WARNING: Please do not put access credentials in the base configuration folder.
+ADVERTENCIA: No coloques credenciales de acceso en la carpeta de configuración base.
 
-## Find out more
-You can find out more about configuration from the [user guide documentation](https://docs.kedro.org/en/stable/configuration/configuration_basics.html).
+## Más información
+Puedes obtener más información sobre la configuración en la [documentación de la guía de usuario](https://docs.kedro.org/en/stable/configuration/configuration_basics.html).
