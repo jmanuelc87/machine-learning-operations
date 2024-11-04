@@ -140,4 +140,3 @@ El equipo está conformado por los siguientes miembros:
 
 La forma de interacción y coordinación es de manera digital, haciendo uso de grupos de Whatsapp, reuniones virtuales y empleando herramientas de trabajo colaborativo.
 Los miembros del equipo residen en diferentes estados de México y algunos en Perú. Además, trabajan en diferentes sectores como consultoría y aerolíneas y cuentan con diferentes skills en tecnologías como Java, Go, Python y Oracle.
->>>>>>> Stashed changes
