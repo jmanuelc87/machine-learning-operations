@@ -15,3 +15,5 @@ catboost
 matplotlib
 mlflow
 kedro-mlflow
+hypothesis
+pytest-html

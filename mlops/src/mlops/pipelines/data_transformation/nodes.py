@@ -25,14 +25,14 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
     }, axis=1, inplace=False)
     return renamed
 
-def feature_standard_scaling(df: pd.DataFrame) -> pd.DataFrame:
+def feature_standard_scaling(df: pd.DataFrame):
     features = df[["Relative Compactness", "Surface Area", "Wall Area", "Roof Area"]]
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(X=features)
     return pd.DataFrame(data=scaled_data, columns=features.columns), scaler
 
 
-def feature_encoding(df: pd.DataFrame) -> pd.DataFrame:
+def feature_encoding(df: pd.DataFrame):
     features = df[["Overall Height", "Orientation", "Glazing Area", "Glazing Area Distribution"]]
     encoder = BinaryEncoder(cols=["Overall Height", "Orientation", "Glazing Area", "Glazing Area Distribution"])
     categorical_data = encoder.fit_transform(features)
