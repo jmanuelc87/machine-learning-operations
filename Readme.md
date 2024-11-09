@@ -54,7 +54,7 @@ El notebook donde se puede revisar este código se encuentra en: https://github.
 
 Para el cumplimiento del objetivo, se desarrolló un proceso compuesto de los nodos de la imagen: 
 
-![alt text](https://github.com/jmanuelc87/machine-learning-operations/blob/Avance_EmilySedan/mlops/images/kedro.jpeg)
+![kedro pipeline](https://github.com/jmanuelc87/machine-learning-operations/blob/main/mlops/docs/images/kedro-pipeline.svg)
 
 ## INICIO DE INSTALACIÓN 
 
@@ -74,12 +74,24 @@ Previamente, se debe descargar a la máquina que ejecutará el código, las sigu
 
 Para descargar una copia del proyecto abrir una consola de Git y ejecutar el comando: 
 
-`git clone https://github.com/jmanuelc87/machine-learning-operations.git `
+`git clone https://github.com/jmanuelc87/machine-learning-operations.git`
+
+2. Descargar kedro via pip o condra
+
+`pip install kedro`
+
+`conda install -c conda-forge kedro`
+
 
 ### EJECUCIÓN
 
-1. Ejecutar proyecto
-PENDIENTE ESCRIBIR
+1. Ve al folder de /mlops.
+2. Valida que tengas python y kedro instalados.
+`python --version` &
+`kedro info`
+3. Inicializa kedro con `kedro run` o `kedro viz run` para la visualizacion del pipeline
+4. Si elegiste la visualizacion, deberia abrirte una pestaña del navegador o ve a http://127.0.0.1:4141/?pid=__default__&expandAllPipelines=false
+
 
 
 ## EQUIPO DE TRABAJO - GRUPO 9

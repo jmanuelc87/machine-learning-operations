@@ -38,6 +38,8 @@ loggers:
 
   mlops:
     level: INFO
+    handlers: [console]
+    propagate: no
 
 root:
   handlers: [rich, info_file_handler]

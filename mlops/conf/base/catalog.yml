@@ -1,0 +1,243 @@
+raw_energy_efficiency:
+  type: pandas.ExcelDataset
+  filepath: data/01_raw/ENB2012_data.xlsx
+  metadata:
+    kedro-viz:
+      layer: raw
+
+
+
+"energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/ENB2012_data.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: intermediate
+
+"renamed_energy_efficiency":
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.ParquetDataset
+    filepath: data/02_intermediate/ENB2012_cols_renamed.parquet
+    load_args:
+      engine: pyarrow
+    save_args:
+      engine: pyarrow
+    metadata:
+      kedro-viz:
+        layer: intermediate
+
+
+
+features_energy_efficiency:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/ENB2012_features.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: primary
+
+target_heating_energy_efficiency:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/ENB2012_target_heating.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: primary
+
+target_cooling_energy_efficiency:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/ENB2012_target_cooling.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: primary
+
+
+
+"{namespace}.scaled_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/ENB2012_scaled.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: feature
+
+"{namespace}.encoded_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/ENB2012_encoded.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: feature
+
+"{namespace}.merged_energy_efficiency":
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/ENB2012_merged.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: feature
+
+
+
+"{namespace}.energy_efficiency_train":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_train.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+"{namespace}.energy_efficiency_test":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_test.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+"{namespace}.target_energy_efficiency_train":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_train_target.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+"{namespace}.target_energy_efficiency_test":
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/{namespace}_ENB2012_test_target.parquet
+  load_args:
+    engine: pyarrow
+  save_args:
+    engine: pyarrow
+  metadata:
+    kedro-viz:
+      layer: model_input
+
+
+"{namespace}.scaler_artifact":
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.sklearn
+  artifact_path: 'scaler'
+
+"{namespace}.encoder_artifact":
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.sklearn
+  artifact_path: 'encoder'
+
+
+"{namespace}.selection_best_r2_model":
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.xgboost
+  artifact_path: "{namespace}/r2/model"
+
+"{namespace}.selection_best_r2_metric":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}.r2"
+
+"{namespace}.selection_best_r2_params":
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.CSVDataset
+    filepath: data/07_model_output/{namespace}_xgb_params.csv
+  artifact_path: "{namespace}/r2/params"
+
+
+
+"{namespace}.selection_best_mape_model":
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.xgboost
+  artifact_path: "{namespace}/mape/model"
+
+"{namespace}.selection_best_mape_metric":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}.mape"
+
+"{namespace}.selection_best_mape_params":
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.CSVDataset
+    filepath: data/07_model_output/{namespace}_xgb_params.csv
+  artifact_path: "{namespace}/mape/params"
+
+
+
+"{namespace}.test_mape":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}.test_mape"
+
+"{namespace}.test_r2":
+  type: kedro_mlflow.io.metrics.MlflowMetricDataset
+  key: "{namespace}.test_r2"
+
+
+# Excel exportado en la funcion de descriptive_statistics
+EDA.descriptive_statistics_excel:
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/EDA/estadistica_descriptiva.xlsx
+  metadata:
+    kedro-viz:
+      layer: reporting
+
+# Histogramas exportados
+EDA.histograms:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/EDA/histograms.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+  save_args:
+    format: png
+
+# Boxplots
+EDA.boxplots:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/EDA/boxplots.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+  save_args:
+    format: png
+
+# Heatmap
+EDA.heatmap:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/EDA/heatmap.png
+  metadata:
+    kedro-viz:
+      layer: reporting
+  save_args:
+    format: png

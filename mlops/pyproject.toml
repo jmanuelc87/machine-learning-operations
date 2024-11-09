@@ -51,6 +51,10 @@ source_dir = "src"
 addopts = """
 --cov-report term-missing \
 --cov src/mlops -ra"""
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 
 [tool.coverage.report]
 fail_under = 0
@@ -73,3 +77,6 @@ select = [
     "T201", # Print Statement
 ]
 ignore = ["E501"]  # Ruff format takes care of line-too-long
+
+[tool.kedro_telemetry]
+project_id = "ba5fadb4e9004bec9c0eb4128dd23c68"
