@@ -17,3 +17,4 @@ mlflow
 kedro-mlflow
 hypothesis
 pytest-html
+apache-airflow==2.7.2
